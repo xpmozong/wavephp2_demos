@@ -1,0 +1,19 @@
+{
+    "require": {
+        "xpmozong/wavephp2": "^1.7"
+    },
+    "autoload": {
+        "classmap": [
+            "protected/controllers",
+            "protected/models",
+            "admin/controllers"
+        ]
+    },
+    "minimum-stability": "dev",
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "http://packagist.phpcomposer.com"
+        }
+    }
+}
