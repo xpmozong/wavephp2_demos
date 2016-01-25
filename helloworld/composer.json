@@ -1,6 +1,6 @@
 {
     "require": {
-        "xpmozong/wavephp2": "^1.7"
+        "xpmozong/wavephp2": "*"
     },
     "autoload": {
         "classmap": [
@@ -9,10 +9,10 @@
         ]
     },
     "minimum-stability": "dev",
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "http://packagist.phpcomposer.com"
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/xpmozong/wavephp2"
         }
-    }
+    ]
 }
