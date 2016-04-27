@@ -15,7 +15,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        echo "hello wavephp";
+        echo "hello wavephp";die;
         
         // 多语言使用，要连数据库，表为w_language，参看enterprise数据库
         // 按规定填入数据
@@ -35,11 +35,6 @@ class SiteController extends Controller
         // echo Wave::app()->homeUrl;
         // //除域名外的根目录地址
         // echo Wave::app()->request->baseUrl;
-
-        // 关闭自动加载
-        // spl_autoload_unregister(array('WaveLoader','loader'));
-        // 开启自动加载
-        // spl_autoload_register(array('WaveLoader','loader'));
 
         // $User = new User();
         // echo "User model 加载成功！";

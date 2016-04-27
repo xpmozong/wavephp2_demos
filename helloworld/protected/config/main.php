@@ -22,27 +22,27 @@ $config = array(
     'debuger'               => false,       // 显示debug信息
     'crash_show_sql'        => true,
     
-    'database'              => array(
-        'driver'            => 'mysql',
-        'master'            => array(
-            'dbhost'        => '127.0.0.1',
-            'username'      => 'root',
-            'password'      => '',
-            'dbname'        => 'enterprise',
-            'charset'       => 'utf8',
-            'table_prefix'  => '',
-            'pconnect'      => false
-        ),
-        'slave'             => array(
-            'dbhost'        => '127.0.0.1',
-            'username'      => 'root',
-            'password'      => '',
-            'dbname'        => 'enterprise',
-            'charset'       => 'utf8',
-            'table_prefix'  => '',
-            'pconnect'      => false
-        )
-    ),
+    // 'database'              => array(
+    //     'driver'            => 'mysql',
+    //     'master'            => array(
+    //         'dbhost'        => '127.0.0.1',
+    //         'username'      => 'root',
+    //         'password'      => '',
+    //         'dbname'        => 'enterprise',
+    //         'charset'       => 'utf8',
+    //         'table_prefix'  => '',
+    //         'pconnect'      => false
+    //     ),
+    //     'slave'             => array(
+    //         'dbhost'        => '127.0.0.1',
+    //         'username'      => 'root',
+    //         'password'      => '',
+    //         'dbname'        => 'enterprise',
+    //         'charset'       => 'utf8',
+    //         'table_prefix'  => '',
+    //         'pconnect'      => false
+    //     )
+    // ),
     
     'session'=>array(
         'driver'            => 'file',
