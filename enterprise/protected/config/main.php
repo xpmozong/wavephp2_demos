@@ -23,9 +23,10 @@ $config = array(
     'crash_show_sql'        => true,        // 是否显示错误sql
     
     'database'              => array(
-        'driver'            => 'mysql',
+        'driver'            => 'wmysqli',
         'master'            => array(
             'dbhost'        => '127.0.0.1',
+            'dbport'        => 3306,
             'username'      => 'root',
             'password'      => '',
             'dbname'        => 'enterprise',
