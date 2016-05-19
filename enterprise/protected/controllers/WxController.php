@@ -47,7 +47,7 @@ class WxController extends Controller
                                         $this->appid);
         $Common = new Common();
         $WxModel = new WxModel();
-        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        $postStr = file_get_contents("php://input");
         $WxModel->recordLog($postStr);
         if (!empty($postStr)){
             $signature = $_GET["signature"];
