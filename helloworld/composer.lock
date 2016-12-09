@@ -1,0 +1,73 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "0c200a58e5dae25f4719e8595cf9ba00",
+    "content-hash": "f5bd22bb961193da4b943c7cede270e4",
+    "packages": [
+        {
+            "name": "xpmozong/wavephp2",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xpmozong/wavephp2.git",
+                "reference": "82c4a8acf7945ee27c7c124ca690973429ce7079"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xpmozong/wavephp2/zipball/82c4a8acf7945ee27c7c124ca690973429ce7079",
+                "reference": "82c4a8acf7945ee27c7c124ca690973429ce7079",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "framework",
+            "autoload": {
+                "classmap": [
+                    "framework/smarty/Smarty.class.php",
+                    "framework/cache",
+                    "framework/captcha",
+                    "framework/cookie",
+                    "framework/core",
+                    "framework/db",
+                    "framework/extends",
+                    "framework/language",
+                    "framework/mail",
+                    "framework/session",
+                    "framework/Wave.php",
+                    "framework/Base.php"
+                ]
+            },
+            "license": [
+                "wavephp-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "xuping",
+                    "email": "361131953@qq.com"
+                }
+            ],
+            "description": "PHP framework",
+            "homepage": "http://www.37study.com",
+            "keywords": [
+                "PHP framework"
+            ],
+            "support": {
+                "issues": "https://github.com/xpmozong/wavephp2/issues",
+                "source": "https://github.com/xpmozong/wavephp2/tree/master"
+            },
+            "time": "2016-10-26 07:58:08"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

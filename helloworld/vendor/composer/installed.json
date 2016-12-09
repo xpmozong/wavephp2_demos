@@ -1,0 +1,58 @@
+[
+    {
+        "name": "xpmozong/wavephp2",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/xpmozong/wavephp2.git",
+            "reference": "82c4a8acf7945ee27c7c124ca690973429ce7079"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/xpmozong/wavephp2/zipball/82c4a8acf7945ee27c7c124ca690973429ce7079",
+            "reference": "82c4a8acf7945ee27c7c124ca690973429ce7079",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "time": "2016-10-26 07:58:08",
+        "type": "framework",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "framework/smarty/Smarty.class.php",
+                "framework/cache",
+                "framework/captcha",
+                "framework/cookie",
+                "framework/core",
+                "framework/db",
+                "framework/extends",
+                "framework/language",
+                "framework/mail",
+                "framework/session",
+                "framework/Wave.php",
+                "framework/Base.php"
+            ]
+        },
+        "license": [
+            "wavephp-2.0"
+        ],
+        "authors": [
+            {
+                "name": "xuping",
+                "email": "361131953@qq.com"
+            }
+        ],
+        "description": "PHP framework",
+        "homepage": "http://www.37study.com",
+        "keywords": [
+            "PHP framework"
+        ],
+        "support": {
+            "issues": "https://github.com/xpmozong/wavephp2/issues",
+            "source": "https://github.com/xpmozong/wavephp2/tree/master"
+        }
+    }
+]
