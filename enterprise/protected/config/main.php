@@ -22,18 +22,17 @@ $config = array(
     'debuger'               => false,       // 显示debug信息
     'crash_show_sql'        => true,        // 是否显示错误sql
     
-    'ini_set'               => array(
-        'session.cookie_domain'     => '.17kx.com',
-        'upload_max_filesize'       => '10M',
-        'post_max_size'             => '10M',        
-        'memory_limit'              => '256M',
-        'session.cache_expire'      => '',
-        'session.use_cookies'       => 1,
-        'session.auto_start'        => 1,
-        'display_errors'            => 1,
-        'date.timezone'             => 'Asia/Shanghai',
-        'max_execution_time'        => 3600
-    ),
+    // 'ini_set'               => array(
+    //     'session.cookie_domain'     => '.17kx.com', // session跨域设置
+    //     'upload_max_filesize'       => '10M',
+    //     'post_max_size'             => '10M',        
+    //     'memory_limit'              => '256M',
+    //     'session.use_cookies'       => 1,
+    //     'session.auto_start'        => 1,
+    //     'display_errors'            => 1,
+    //     'date.timezone'             => 'Asia/Shanghai',
+    //     'max_execution_time'        => 3600
+    // ),
     
     'database'              => array(
         'driver'            => 'wmysqli',
