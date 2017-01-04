@@ -1,0 +1,55 @@
+[
+    {
+        "name": "xpmozong/wavephp2",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/xpmozong/wavephp2.git",
+            "reference": "49800ef9fa6bf0615907cf7df3c761c776eeea35"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://packagist.phpcomposer.com/files/xpmozong/wavephp2/49800ef9fa6bf0615907cf7df3c761c776eeea35.zip",
+            "reference": "49800ef9fa6bf0615907cf7df3c761c776eeea35",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "time": "2016-12-23 07:31:10",
+        "type": "framework",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "framework/smarty/Smarty.class.php",
+                "framework/cache",
+                "framework/captcha",
+                "framework/cookie",
+                "framework/core",
+                "framework/db",
+                "framework/extends",
+                "framework/language",
+                "framework/mail",
+                "framework/session",
+                "framework/Wave.php",
+                "framework/Base.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "wavephp-2.0"
+        ],
+        "authors": [
+            {
+                "name": "xuping",
+                "email": "361131953@qq.com"
+            }
+        ],
+        "description": "PHP framework",
+        "homepage": "http://www.37study.com",
+        "keywords": [
+            "php framework"
+        ]
+    }
+]

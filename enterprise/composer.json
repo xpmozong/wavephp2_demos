@@ -9,11 +9,5 @@
             "admin/controllers"
         ]
     },
-    "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/xpmozong/wavephp2"
-        }
-    ]
+    "minimum-stability": "dev"
 }
