@@ -1,5 +1,4 @@
 {%include file="layout/header.html"%}
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">个人设置</h3>
@@ -32,7 +31,7 @@
             </form>
         </div>
     </div>
-</div>
+{%include file="layout/loadjs.html"%}
 <script type="text/javascript">
 var checkForm = function() {
     var password1 = $("#password1").val();

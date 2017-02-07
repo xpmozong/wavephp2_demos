@@ -1,0 +1,30 @@
+{%include file="layout/header.html"%}
+<div class="container main">
+    <div class="col-sm-2 blog-sidebar">
+        <ul class="nav nav-sidebar list-group">
+            {%foreach from=$category item="value" key="key" %}
+            <li class="list-group-item {%if $value.cid == $cid%} active {%/if%}">
+                <a href="{%$homeUrl%}category/index?cid={%$value.cid%}">{%$value.c_name%}</a>
+            </li>
+            {%/foreach%}
+        </ul>
+    </div>
+    <div class="col-sm-10 blog-main">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                您当前位置：
+                <a href="{%$homeUrl%}">首页</a> &gt;
+                {%foreach from=$category item="value" key="key" %}
+                    {%if $value.cid == $cid%} {%$value.c_name%} {%/if%}
+                {%/foreach%}
+            </div>
+            <div class="panel-body">
+                <h3>{%$data.title%}</h3>
+                <p>{%$data.add_date%}</p>
+                {%$data.content%}
+            </div>
+        </div>
+    </div>
+</div>
+{%include file="layout/loadjs.html"%}
+{%include file="layout/footer.html"%}

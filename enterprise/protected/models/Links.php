@@ -5,7 +5,7 @@
 class Links extends Model
 {
     protected function init() {
-        $this->_tableName = 'links';
+        $this->_tableName = $this->getTablePrefix().'links';
     }
 }
 ?>

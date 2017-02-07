@@ -5,7 +5,7 @@
 class Category extends Model
 {
     protected function init() {
-        $this->_tableName = 'category';
+        $this->_tableName = $this->getTablePrefix().'category';
     }
 }
 ?>

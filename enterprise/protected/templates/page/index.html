@@ -1,0 +1,16 @@
+{%include file="layout/header.html"%}
+<div class="container main">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            您当前位置：
+            <a href="{%$homeUrl%}">首页</a> &gt; 页面
+        </div>
+        <div class="panel-body">
+            <h3>{%$data.title%}</h3>
+            <p>发布时间：{%$data.add_date%}</p>
+            {%$data.content%}
+        </div>
+    </div>
+</div>
+{%include file="layout/loadjs.html"%}
+{%include file="layout/footer.html"%}

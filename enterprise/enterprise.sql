@@ -1,32 +1,25 @@
--- phpMyAdmin SQL Dump
--- version 3.5.2
--- http://www.phpmyadmin.net
---
--- 主机: localhost
--- 生成日期: 2015 年 10 月 26 日 13:59
--- 服务器版本: 5.5.25a
--- PHP 版本: 5.4.4
+/*
+Navicat MySQL Data Transfer
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+Source Server         : localhost
+Source Server Version : 50505
+Source Host           : localhost:3306
+Source Database       : enterprise
 
+Target Server Type    : MYSQL
+Target Server Version : 50505
+File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+Date: 2017-01-12 10:52:27
+*/
 
---
--- 数据库: `enterprise`
---
+SET FOREIGN_KEY_CHECKS=0;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `admin_log`
---
-
-CREATE TABLE IF NOT EXISTS `admin_log` (
+-- ----------------------------
+-- Table structure for `b_admin_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `b_admin_log`;
+CREATE TABLE `b_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` char(10) NOT NULL DEFAULT '' COMMENT '用户名',
   `query_uri` varchar(512) NOT NULL DEFAULT '' COMMENT '访问链接',
@@ -36,301 +29,245 @@ CREATE TABLE IF NOT EXISTS `admin_log` (
   `client_ip` char(15) NOT NULL DEFAULT '' COMMENT 'IP地址',
   `time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=155 ;
+) ENGINE=MyISAM AUTO_INCREMENT=631 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
---
--- 转存表中的数据 `admin_log`
---
+-- ----------------------------
+-- Records of b_admin_log
+-- ----------------------------
 
-INSERT INTO `admin_log` (`id`, `username`, `query_uri`, `description`, `parameters`, `remark`, `client_ip`, `time`) VALUES
-(104, '', '', '用户登录', 'user_login=xpmozong | user_pass=123456 | ', 0, '', 1445828732),
-(105, 'xpmozong', '', '用户登录', 'user_login=361131953@qq.com | user_pass=123456 | ', 1, '', 1445828778),
-(154, 'xpmozong', '', '用户登录', 'user_login=361131953@qq.com | user_pass=123456 | ', 1, '', 1445838991);
+-- ----------------------------
+-- Table structure for `b_menus`
+-- ----------------------------
+DROP TABLE IF EXISTS `b_menus`;
+CREATE TABLE `b_menus` (
+  `menu_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `top_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父级菜单',
+  `menu_url` varchar(50) NOT NULL DEFAULT '' COMMENT '功能链接',
+  `menu_name` varchar(50) NOT NULL DEFAULT '' COMMENT '菜单名称',
+  `menu_order` smallint(6) unsigned DEFAULT '0',
+  `pclass` varchar(255) DEFAULT '' COMMENT '父class',
+  `fastyle` varchar(255) DEFAULT NULL COMMENT '图标类型',
+  PRIMARY KEY (`menu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Records of b_menus
+-- ----------------------------
+INSERT INTO `b_menus` VALUES ('1', '0', '', '设置', '0', 'admin', 'fa-dashboard');
+INSERT INTO `b_menus` VALUES ('2', '0', '', '后台管理', '1', 'manage', 'fa-list');
+INSERT INTO `b_menus` VALUES ('5', '1', 'admin/index', '首页', '0', 'admin', 'fa-circle-o');
+INSERT INTO `b_menus` VALUES ('6', '2', 'menus', '菜单管理', '0', 'manage', 'fa-circle-o');
+INSERT INTO `b_menus` VALUES ('7', '2', 'groups', '权限组管理', '1', 'manage', 'fa-circle-o');
+INSERT INTO `b_menus` VALUES ('8', '2', 'users', '账号管理', '2', 'manage', 'fa-circle-o');
+INSERT INTO `b_menus` VALUES ('33', '2', 'logs', '系统日志', '3', 'manage', 'fa-circle-o');
+INSERT INTO `b_menus` VALUES ('34', '0', '', '内容管理', '2', 'cms', 'fa-list');
+INSERT INTO `b_menus` VALUES ('35', '34', 'frontmenu', '前台菜单', '0', 'cms', 'fa-circle-o');
+INSERT INTO `b_menus` VALUES ('36', '34', 'categories', '文章分类', '1', 'cms', 'fa-circle-o');
+INSERT INTO `b_menus` VALUES ('37', '34', 'articles', '文章管理', '2', 'cms', 'fa-circle-o');
+INSERT INTO `b_menus` VALUES ('38', '34', 'portalpage', '页面管理', '3', 'cms', 'fa-circle-o');
+INSERT INTO `b_menus` VALUES ('39', '34', 'links', '友情链接', '4', 'cms', 'fa-circle-o');
 
---
--- 表的结构 `articles`
---
+-- ----------------------------
+-- Table structure for `b_users`
+-- ----------------------------
+DROP TABLE IF EXISTS `b_users`;
+CREATE TABLE `b_users` (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `group_id` int(11) NOT NULL COMMENT '用户组ID',
+  `email` varchar(255) NOT NULL COMMENT '邮箱',
+  `is_active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '激活 0-否 1-是',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
+  `add_date` datetime DEFAULT NULL COMMENT '添加日期',
+  `last_login_date` datetime DEFAULT NULL COMMENT '最后登录日期',
+  PRIMARY KEY (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `articles` (
+-- ----------------------------
+-- Records of b_users
+-- ----------------------------
+INSERT INTO `b_users` VALUES ('1', 'admin', 'aec6f39178f278c8e071ec9237697c20', '1', '361131953@qq.com', '1', '', '2015-08-08 14:35:43', '2017-01-10 17:57:44');
+
+-- ----------------------------
+-- Table structure for `b_users_group`
+-- ----------------------------
+DROP TABLE IF EXISTS `b_users_group`;
+CREATE TABLE `b_users_group` (
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `group_name` varchar(255) NOT NULL COMMENT '权限组名称',
+  `group_state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：0-禁用 1-启用',
+  `menu_ids` text,
+  `remarks` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of b_users_group
+-- ----------------------------
+INSERT INTO `b_users_group` VALUES ('1', '0', '超级管理员组', '1', '1,5,2,6,7,8,33,34,35,36,37,38,39', '');
+
+-- ----------------------------
+-- Table structure for `w_articles`
+-- ----------------------------
+DROP TABLE IF EXISTS `w_articles`;
+CREATE TABLE `w_articles` (
   `aid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL COMMENT '标题',
   `cid` int(11) NOT NULL DEFAULT '0' COMMENT '文章分类id',
   `add_date` datetime DEFAULT NULL COMMENT '添加时间',
   PRIMARY KEY (`aid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='文章表' AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
---
--- 转存表中的数据 `articles`
---
+-- ----------------------------
+-- Records of w_articles
+-- ----------------------------
+INSERT INTO `w_articles` VALUES ('1', '是打发斯蒂芬是打发', '2', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('2', '是打发士大夫似的', '1', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('3', 'linux小结', '3', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('4', '阿士大夫士大夫', '1', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('5', '开始计划的副科级阿士大夫', '1', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('6', '间距为', '1', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('7', '色人体各瑞特人突然', '1', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('8', '测试', '1', '2017-01-05 18:35:21');
 
-INSERT INTO `articles` (`aid`, `title`, `cid`, `add_date`) VALUES
-(1, '是打发斯蒂芬是打发', 2, '2014-10-26 15:43:00'),
-(2, '是打发士大夫似的', 1, '2014-10-26 15:43:00'),
-(3, 'linux小结', 3, '2014-10-26 15:43:00'),
-(4, '阿士大夫士大夫', 1, '2014-10-26 15:43:00'),
-(5, '开始计划的副科级阿士大夫', 1, '2014-10-26 15:43:00'),
-(6, '间距为', 1, '2014-10-26 15:43:00'),
-(7, '色人体各瑞特人突然', 1, '2014-10-26 15:43:00');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `articles_content`
---
-
-CREATE TABLE IF NOT EXISTS `articles_content` (
+-- ----------------------------
+-- Table structure for `w_articles_content`
+-- ----------------------------
+DROP TABLE IF EXISTS `w_articles_content`;
+CREATE TABLE `w_articles_content` (
   `ac_id` int(11) NOT NULL AUTO_INCREMENT,
   `aid` int(11) NOT NULL COMMENT '文章id',
   `content` longtext,
   `content2` longtext COMMENT '工作地点',
   PRIMARY KEY (`ac_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
---
--- 转存表中的数据 `articles_content`
---
+-- ----------------------------
+-- Records of w_articles_content
+-- ----------------------------
+INSERT INTO `w_articles_content` VALUES ('24', '7', '&lt;p&gt;对分公司对分公司对分公司对分公司的风格sdfsdfsdf&lt;/p&gt;\r\n', null);
+INSERT INTO `w_articles_content` VALUES ('25', '6', '&lt;p&gt;深深地发士大夫撒地方&lt;/p&gt;\r\n', null);
+INSERT INTO `w_articles_content` VALUES ('26', '8', '&lt;p&gt;&amp;quot;是打发士大夫撒地方的&lt;/p&gt;\r\n', null);
+INSERT INTO `w_articles_content` VALUES ('28', '5', '&lt;p&gt;是打发士大夫士大夫撒旦法师的分&lt;/p&gt;\r\n', null);
+INSERT INTO `w_articles_content` VALUES ('29', '4', '&lt;p&gt;是打发是打发斯蒂芬斯蒂芬&lt;/p&gt;\r\n', null);
+INSERT INTO `w_articles_content` VALUES ('30', '1', '&lt;p&gt;是打发是打发斯蒂芬斯蒂芬胜多负少&lt;/p&gt;\r\n\r\n&lt;p&gt;是短发撒旦法撒旦法水电费水电费&lt;/p&gt;\r\n\r\n&lt;p&gt;是短发撒旦法撒旦法水电费水电费&lt;/p&gt;\r\n', null);
+INSERT INTO `w_articles_content` VALUES ('31', '3', '&lt;p&gt;是打发斯蒂芬斯蒂芬&lt;/p&gt;\r\n\r\n&lt;p&gt;是打发士大夫撒地方的分&lt;/p&gt;\r\n\r\n&lt;p&gt;士大夫士大夫撒分维吾尔&lt;/p&gt;\r\n', null);
 
-INSERT INTO `articles_content` (`ac_id`, `aid`, `content`, `content2`) VALUES
-(24, 7, '<p>对分公司对分公司对分公司对分公司的风格</p>\r\n', NULL),
-(25, 6, '<p>深深地发士大夫撒地方</p>\r\n', NULL);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `category`
---
-
-CREATE TABLE IF NOT EXISTS `category` (
+-- ----------------------------
+-- Table structure for `w_category`
+-- ----------------------------
+DROP TABLE IF EXISTS `w_category`;
+CREATE TABLE `w_category` (
   `cid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cate_order` int(11) DEFAULT '0',
   `c_name` varchar(255) DEFAULT NULL COMMENT '分类名',
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='分类表' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
---
--- 转存表中的数据 `category`
---
+-- ----------------------------
+-- Records of w_category
+-- ----------------------------
+INSERT INTO `w_category` VALUES ('1', '0', '行业资讯');
+INSERT INTO `w_category` VALUES ('2', '0', '企业动态');
+INSERT INTO `w_category` VALUES ('3', '0', '技术文章');
 
-INSERT INTO `category` (`cid`, `c_name`) VALUES
-(1, '行业资讯'),
-(2, '企业动态'),
-(3, '技术文章');
+-- ----------------------------
+-- Table structure for `w_front_menus`
+-- ----------------------------
+DROP TABLE IF EXISTS `w_front_menus`;
+CREATE TABLE `w_front_menus` (
+  `menu_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `top_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父级菜单',
+  `url_id` varchar(20) DEFAULT NULL COMMENT '对应id',
+  `menu_url` varchar(50) NOT NULL DEFAULT '' COMMENT '功能链接',
+  `menu_name` varchar(50) NOT NULL DEFAULT '' COMMENT '菜单名称',
+  `menu_order` smallint(6) unsigned DEFAULT '0',
+  `pclass` varchar(255) DEFAULT '' COMMENT '父class',
+  PRIMARY KEY (`menu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Records of w_front_menus
+-- ----------------------------
+INSERT INTO `w_front_menus` VALUES ('1', '0', '', '', '首页', '0', 'index');
+INSERT INTO `w_front_menus` VALUES ('2', '0', '', '', '新闻动态', '1', 'cms');
+INSERT INTO `w_front_menus` VALUES ('3', '0', '', '', '关于我们', '2', 'about');
+INSERT INTO `w_front_menus` VALUES ('4', '2', 'c_1', 'category/index?cid=1', '行业资讯', '0', 'cms');
+INSERT INTO `w_front_menus` VALUES ('5', '2', 'c_2', 'category/index?cid=2', '企业动态', '1', 'cms');
+INSERT INTO `w_front_menus` VALUES ('6', '2', 'c_3', 'category/index?cid=3', '技术文章', '2', 'cms');
+INSERT INTO `w_front_menus` VALUES ('7', '3', 'p_1', 'page/index?pid=1', '公司简介', '0', 'about');
+INSERT INTO `w_front_menus` VALUES ('8', '3', 'p_2', 'page/index?pid=2', '加入我们', '1', 'about');
+INSERT INTO `w_front_menus` VALUES ('9', '3', 'p_3', 'page/index?pid=3', '联系我们', '2', 'about');
 
---
--- 表的结构 `gh_manage`
---
-
-CREATE TABLE IF NOT EXISTS `gh_manage` (
-  `gid` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) NOT NULL COMMENT '用户ID',
-  `gh_id` varchar(100) NOT NULL COMMENT '原始ID',
-  `gh_name` varchar(100) NOT NULL COMMENT '公众号名称',
-  `gh_type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '账号类型 1-订阅号 2-认证订阅号 3-服务号 4-认证服务号',
-  `gh_key` varchar(255) NOT NULL COMMENT 'URL',
-  `gh_token` varchar(100) NOT NULL,
-  `gh_enaeskey` varchar(255) NOT NULL COMMENT 'EncodingAESKey',
-  `gh_iseskey` tinyint(1) NOT NULL DEFAULT '1' COMMENT '加密 0-否 1-是',
-  `gh_appid` varchar(100) NOT NULL COMMENT '应用ID',
-  `gh_appsecret` varchar(100) NOT NULL COMMENT '应用密钥',
-  PRIMARY KEY (`gid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
-
---
--- 转存表中的数据 `gh_manage`
---
-
-INSERT INTO `gh_manage` (`gid`, `userid`, `gh_id`, `gh_name`, `gh_type`, `gh_key`, `gh_token`, `gh_enaeskey`, `gh_iseskey`, `gh_appid`, `gh_appsecret`) VALUES
-(7, 3, 'gh_eb0595b205cb', 'xp趣行天下', 1, '541122111aa123f6', '0fecff7c', 'a20168b10fecff7b541122111aa123f6cff7b541122', 1, 'wxad816166f3f27a0c', '166fd156f92ab5415c77838df2a94c43'),
-(10, 3, 'gh_18cb4be750e6', '测试公众号', 1, 'e2b10dbfd698078f', '9f9a1fb8', 'e8923ab49f9a1fb8e2b10dbfd698078fdbfd698078f', 0, 'wx5d57eecd289aba9e', '0173fb30d6a51c042728823ee9ab9d53');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `gh_menu`
---
-
-CREATE TABLE IF NOT EXISTS `gh_menu` (
-  `mid` int(11) NOT NULL AUTO_INCREMENT COMMENT '菜单id',
-  `gid` int(11) NOT NULL COMMENT '公众号id',
-  `content` text NOT NULL COMMENT '公众号菜单 json',
-  PRIMARY KEY (`mid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- 转存表中的数据 `gh_menu`
---
-
-INSERT INTO `gh_menu` (`mid`, `gid`, `content`) VALUES
-(2, 7, '{\r\n    "button":[\r\n    {\r\n        "type":"click",\r\n        "name":"会议",\r\n        "key":"RECENT_METTING"\r\n    },\r\n    {\r\n        "type":"click",\r\n        "name":"管理",\r\n        "key":"MANAGEMENT"\r\n    },\r\n    {\r\n        "type":"click",\r\n        "name":"帮助",\r\n        "key":"HELP"\r\n    }]\r\n}'),
-(3, 10, ' {\r\n     "button":[\r\n     {	\r\n          "type":"click",\r\n          "name":"今日歌曲",\r\n          "key":"V1001_TODAY_MUSIC"\r\n      },\r\n      {\r\n           "name":"菜单",\r\n           "sub_button":[\r\n           {	\r\n               "type":"view",\r\n               "name":"搜索",\r\n               "url":"http://www.soso.com/"\r\n            },\r\n            {\r\n               "type":"view",\r\n               "name":"视频",\r\n               "url":"http://v.qq.com/"\r\n            },\r\n            {\r\n               "type":"click",\r\n               "name":"赞一下我们",\r\n               "key":"V1001_GOOD"\r\n            }]\r\n       }]\r\n }');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `gh_type`
---
-
-CREATE TABLE IF NOT EXISTS `gh_type` (
-  `gh_type_id` int(11) NOT NULL AUTO_INCREMENT,
-  `gh_type_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`gh_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
-
---
--- 转存表中的数据 `gh_type`
---
-
-INSERT INTO `gh_type` (`gh_type_id`, `gh_type_name`) VALUES
-(1, '订阅号'),
-(2, '认证订阅号'),
-(3, '服务号'),
-(4, '认证服务号'),
-(5, '测试公众号');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `links`
---
-
-CREATE TABLE IF NOT EXISTS `links` (
-  `lid` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`lid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- 转存表中的数据 `links`
---
-
-INSERT INTO `links` (`lid`, `url`, `title`) VALUES
-(1, 'http://www.baidu.com', '百度'),
-(2, 'https://github.com/1', 'github');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `substance`
---
-
-CREATE TABLE IF NOT EXISTS `substance` (
-  `sid` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL COMMENT '标题',
-  `content` longtext COMMENT '内容',
-  `add_date` datetime DEFAULT NULL COMMENT '添加日期',
-  PRIMARY KEY (`sid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='内容表' AUTO_INCREMENT=17 ;
-
---
--- 转存表中的数据 `substance`
---
-
-INSERT INTO `substance` (`sid`, `title`, `content`, `add_date`) VALUES
-(1, '公司简介', '<p>是打发斯蒂芬多少</p>\r\n\r\n<p>类似的纠纷连卡时间的分开了就爱是打开了附件快乐时间的分开就暗示的客服就阿里开始的积分卡时间到了房间爱历史课大姐夫是理科的肌肤卡拉是大家分开了撒娇的副科级阿士大夫刻录机奥斯卡的飞机拉是看得见方腊时刻的肌肤凯立德了深刻的肌肤拉克是大家分开了就是打开了房间了深刻的激发了开始的减肥临时卡打飞机了凯撒的机房里卡时间的咖啡机</p>\r\n\r\n<p><img alt="" src="http://127.0.0.1/enterprise/uploadfile/substance/201410/1414290969_11953.jpg" style="height:531px; width:800px" /></p>\r\n\r\n<p>暗示法师打发士大夫士大夫</p>\r\n\r\n<p>卡死了的看法开开开始的丰厚的健康的合法为客户发放啊是理科的肌肤哈就开始大富豪</p>\r\n\r\n<p>可是记得回复卡就是的回房间阿克苏的肌肤会卡就是的恢复健康阿卡时间的回复可就是的合法可是记得发货快接啊四大行结婚d</p>\r\n\r\n<p>是看得见回复卡就是的复活节</p>\r\n', NULL),
-(2, '加入我们', '<p>电脑发士大夫士大夫还记得</p>\r\n\r\n<p>舍得放开撒娇的法律会计师打开</p>\r\n\r\n<p>是的激发了深刻的肌肤可拉萨的疯狂</p>\r\n\r\n<p>事登记法拉克时间的法律会计师打开</p>\r\n\r\n<p>实力的快件费卢卡斯的肌肤开始觉得</p>\r\n\r\n<p>哦对了房间里是卡的肌肤开始的减肥的减肥</p>\r\n\r\n<p><img alt="" src="http://127.0.0.1/enterprise/uploadfile/substance/201410/1414301759_28039.jpg" style="height:531px; width:800px" /></p>\r\n\r\n<p>时间开房记录是卡机的付款了是的减肥了开始就爱的分开了</p>\r\n', NULL),
-(3, '联系我们', '<p>历史的肌肤可就是的离开房间SD卡房间里是卡的积分</p>\r\n\r\n<p>实力的开发就是可怜的肌肤</p>\r\n\r\n<p>是打飞机阿士大夫就离开</p>\r\n\r\n<p><img alt="" src="http://127.0.0.1/enterprise/uploadfile/substance/201410/1414301874_4100.jpg" style="height:531px; width:800px" /></p>\r\n\r\n<p>离开是大家看法是理科的肌肤是打发</p>\r\n\r\n<p>是，的卡夫卡时间的方式见对方奥斯卡的房间爱时刻的肌肤开始的减肥阿斯兰的科技弗拉斯柯达复健科就暗示了对方可就是开的房间来看就是了打开房间爱死了肯德基阿斯兰的开发就爱是可怜的叫法是可怜的金风科技是咖啡机 暗示了对方即可</p>\r\n\r\n<p>是的发生的健康</p>\r\n\r\n<p>是打发了深刻的肌肤开始的减肥</p>\r\n', NULL),
-(4, '关于我们', '<p>哦了时间方腊时可见的福克斯的九分裤</p>\r\n\r\n<p>是围绕玩儿玩儿阿士大夫士大夫 士大夫似的发生是打发斯蒂芬</p>\r\n\r\n<p>是打飞机啊是的回复时间的符合实际看到是的减肥哈时间肯定符合实际得分</p>\r\n\r\n<p>打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥打开肌肤哈市科技的回复就卡死的发挥</p>\r\n\r\n<p>了时刻记得了副科级奥斯卡的减肥快乐圣诞节阿斯利康的房间爱是可怜的减肥了开始大家了深刻的积分卡拉斯加豆腐</p>\r\n\r\n<p>克里斯多夫看见爱是打开了房间啊是理科的肌肤斯科拉的复健科</p>\r\n\r\n<p>卢卡斯的肌肤uweiurweuy科技的回复是开机动画</p>\r\n', NULL),
-(5, '客户案例', '<p>是打发斯蒂芬就是的合法会计师的附件是的话</p>\r\n\r\n<p>是开的房间爱死了的科技富士康的附件是看得见阿斯达克积分卡时间的分类看时间到了附近阿斯兰的房间爱是可怜的积分卡拉斯的见附件阿斯兰的剑法是可怜的减肥快乐驾驶的客服就爱是看得见开始交电费卡时间的付款链接阿什利会计法</p>\r\n\r\n<p>时刻的减肥了卡时间的咖啡机</p>\r\n\r\n<p>拉屎开的房间爱上是可怜的发生的纠纷是的肌肤的肌肤</p>\r\n\r\n<p>开始的房间爱斯柯达分历史的分开就是的看法</p>\r\n\r\n<p>开始的减肥死了打飞机是理科的副驾驶的空间是理科的肌肤可适当</p>\r\n\r\n<p>是开的房是理科的肌肤肯德基</p>\r\n\r\n<p>卡死了都发卡机是打发是打发斯蒂芬阿斯顿发士大夫是打发斯蒂芬是打发斯蒂芬</p>\r\n', NULL),
-(6, '桌面服务', '<p>时间的发货及时打飞机阿斯达克附件是肯定</p>\r\n\r\n<p>是打开房间爱时刻打飞机</p>\r\n\r\n<p>是打开房间爱时刻的肌肤开始打飞机是打开房间爱时刻打飞机</p>\r\n\r\n<p>看时间的分开就暗示的咖啡机</p>\r\n\r\n<p>了深刻的积分卡拉斯的肌肤可就是开朗大方</p>\r\n\r\n<p>离开时间的付款时间的付款时间的法律</p>\r\n\r\n<p>卢卡斯的肌肤克拉就是的开发阶段</p>\r\n\r\n<p>离开时间的分开就是打开了附件是老大副科级</p>\r\n', NULL),
-(7, '网络服务', '<p>是打开房间爱上的飞机打开士大夫撒打发士大夫</p>\r\n\r\n<p>是打发士大夫士大夫士大夫</p>\r\n\r\n<p>是打发士大夫士大夫是打发士大夫士大夫士大夫啊是打发士大夫士大夫士大夫是打发斯蒂芬</p>\r\n\r\n<p>是打发士大夫似的奋斗</p>\r\n\r\n<p>是打发是打发士大夫士大夫士大夫阿士大夫士大夫撒打发士大夫啊是打发士大夫似的士大夫撒打发士大夫</p>\r\n\r\n<p>是打发士大夫士大夫阿斯顿发送到</p>\r\n\r\n<p>是打发是打发士大夫似的是打发斯蒂芬</p>\r\n\r\n<p>是打发士大夫士大夫地方</p>\r\n', NULL),
-(8, '系统服务', '<p>是打发士大夫士大夫士大夫是打发斯蒂芬</p>\r\n\r\n<p>是打发是打发士大夫似的发送到fsadf</p>\r\n\r\n<p>是打发似的发是打发是打发士大夫似的发是打发是打发士大夫似的</p>\r\n\r\n<p>士大夫卡士大夫撒打发士大夫</p>\r\n\r\n<p>是打发士大夫似的发士大夫是打发是打发w似的</p>\r\n\r\n<p>是打发是打发似的wwww</p>\r\n', NULL),
-(9, '办公设备服务', '<p>是打发是打发士大夫士大夫阿士大夫士大夫士大夫</p>\r\n\r\n<p>是打发是打发士大夫士大夫</p>\r\n\r\n<p>是打发是打发士大夫士大夫士大夫士大夫的师傅是打发是打发士大夫士大夫第三方士大夫的方式的发生大幅度</p>\r\n\r\n<p>士大夫撒打发士大夫的</p>\r\n\r\n<p>地方是打发是打发士大夫士大夫士大夫</p>\r\n\r\n<p>是打发是打发士大夫士大夫士大夫士大夫的师傅是打发是打发士大夫士大夫第三方士大夫的方式的发生大幅度</p>\r\n\r\n<p>打发士大夫撒地方是打发士大夫士大夫地方第三方<br />\r\n&nbsp;</p>\r\n', NULL),
-(10, '数据安全', '<p>士大夫撒打发士大夫士大夫士大夫阿士大夫士大夫撒打发士大夫是打发斯蒂芬</p>\r\n\r\n<p>是打发士大夫士大夫是打发斯蒂芬</p>\r\n\r\n<p>发是打发是打发士大夫士大夫第三方</p>\r\n\r\n<p>实施打发打发打发士大夫撒打发似的</p>\r\n\r\n<p>温温热人味儿是打发是打发士大夫士大夫士大夫士大夫的师傅是打发是打发士大夫士大夫第三方士大夫的方式的发生大幅度</p>\r\n\r\n<p>士大夫撒打发士大夫</p>\r\n', NULL),
-(11, 'IT设备迁移', '<p>事发时的飞洒的方式发生的范德萨</p>\r\n\r\n<p>士大夫撒打发士大夫是打发是打发斯蒂芬</p>\r\n\r\n<p>是打发是打发士大夫士大夫士大夫士大夫的师傅是打发是打发士大夫士大夫第三方士大夫的方式的发生大幅度sdfasdf</p>\r\n\r\n<p>是打发士大夫士大夫是打发似的</p>\r\n\r\n<p>打发士大夫士大夫</p>\r\n\r\n<p>是打发是打发士大夫士大夫</p>\r\n\r\n<p>士大夫撒打发士大夫是打发</p>\r\n', NULL),
-(12, '紧急服务', '<p>紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务紧急服务</p>\r\n', NULL),
-(13, '例行巡检', '<p>例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检例行巡检</p>\r\n', NULL),
-(14, '场地驻场', '<p>场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场场地驻场</p>\r\n', NULL),
-(15, '远程服务', '<p>远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务远程服务</p>\r\n', NULL),
-(16, '咨询服务', '<p>咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务咨询服务</p>\r\n', NULL);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `users`
---
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `userid` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0' COMMENT '激活 0-否 1-是',
-  `add_date` datetime DEFAULT NULL,
-  `last_login_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`userid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- 转存表中的数据 `users`
---
-
-INSERT INTO `users` (`userid`, `username`, `password`, `email`, `is_active`, `add_date`, `last_login_date`) VALUES
-(3, 'xpmozong', 'e10adc3949ba59abbe56e057f20f883e', '361131953@qq.com', 1, '2015-07-17 17:08:19', '2015-10-08 10:14:08');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `wx_log`
---
-
-CREATE TABLE IF NOT EXISTS `wx_log` (
-  `log_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `log_text` text NOT NULL,
-  `log_time` datetime NOT NULL,
-  PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `w_language`
---
-
-CREATE TABLE IF NOT EXISTS `w_language` (
+-- ----------------------------
+-- Table structure for `w_language`
+-- ----------------------------
+DROP TABLE IF EXISTS `w_language`;
+CREATE TABLE `w_language` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '语言id',
   `lang_code` varchar(20) NOT NULL DEFAULT '' COMMENT '语言编码',
   `lang_key` varchar(50) NOT NULL COMMENT '翻译项',
   `lang_value` varchar(128) NOT NULL DEFAULT '' COMMENT '翻译内容',
   PRIMARY KEY (`id`),
   UNIQUE KEY `lang_index` (`lang_value`,`lang_code`,`lang_key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='多语言翻译项' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='多语言翻译项';
 
---
--- 转存表中的数据 `w_language`
---
+-- ----------------------------
+-- Records of w_language
+-- ----------------------------
+INSERT INTO `w_language` VALUES ('2', 'vi-vn', '1', 'Quản lý cổng');
+INSERT INTO `w_language` VALUES ('1', 'zh-cn', '1', '平台管理');
 
-INSERT INTO `w_language` (`id`, `lang_code`, `lang_key`, `lang_value`) VALUES
-(2, 'vi-vn', '1', 'Quản lý cổng'),
-(1, 'zh-cn', '1', '平台管理');
+-- ----------------------------
+-- Table structure for `w_links`
+-- ----------------------------
+DROP TABLE IF EXISTS `w_links`;
+CREATE TABLE `w_links` (
+  `lid` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`lid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Records of w_links
+-- ----------------------------
+INSERT INTO `w_links` VALUES ('1', 'http://www.baidu.com', '百度');
+INSERT INTO `w_links` VALUES ('2', 'https://github.com', 'github');
 
---
--- 表的结构 `w_sessions`
---
+-- ----------------------------
+-- Table structure for `w_portalpage`
+-- ----------------------------
+DROP TABLE IF EXISTS `w_portalpage`;
+CREATE TABLE `w_portalpage` (
+  `pid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL COMMENT '标题',
+  `content` longtext COMMENT '内容',
+  `add_date` datetime DEFAULT NULL COMMENT '添加日期',
+  PRIMARY KEY (`pid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='内容表';
 
-CREATE TABLE IF NOT EXISTS `w_sessions` (
+-- ----------------------------
+-- Records of w_portalpage
+-- ----------------------------
+INSERT INTO `w_portalpage` VALUES ('1', '公司简介', '<p>是打发斯蒂芬多少</p>\r\n\r\n<p>类似的纠纷连卡时间的分开了就爱是打开了附件快乐时间的分开就暗示的客服就阿里开始的积分卡时间到了房间爱历史课大姐夫是理科的肌肤卡拉是大家分开了撒娇的副科级阿士大夫刻录机奥斯卡的飞机拉是看得见方腊时刻的肌肤凯立德了深刻的肌肤拉克是大家分开了就是打开了房间了深刻的激发了开始的减肥临时卡打飞机了凯撒的机房里卡时间的咖啡机</p>\r\n\r\n<p><img alt=\"\" src=\"http://127.0.0.1/enterprise/uploadfile/substance/201410/1414290969_11953.jpg\" style=\"height:531px; width:800px\" /></p>\r\n\r\n<p>暗示法师打发士大夫士大夫</p>\r\n\r\n<p>卡死了的看法开开开始的丰厚的健康的合法为客户发放啊是理科的肌肤哈就开始大富豪</p>\r\n\r\n<p>可是记得回复卡就是的回房间阿克苏的肌肤会卡就是的恢复健康阿卡时间的回复可就是的合法可是记得发货快接啊四大行结婚d</p>\r\n\r\n<p>是看得见回复卡就是的复活节</p>\r\n', '2017-01-10 16:14:15');
+INSERT INTO `w_portalpage` VALUES ('2', '加入我们', '<p>电脑发士大夫士大夫还记得</p>\r\n\r\n<p>舍得放开撒娇的法律会计师打开</p>\r\n\r\n<p>是的激发了深刻的肌肤可拉萨的疯狂</p>\r\n\r\n<p>事登记法拉克时间的法律会计师打开</p>\r\n\r\n<p>实力的快件费卢卡斯的肌肤开始觉得</p>\r\n\r\n<p>哦对了房间里是卡的肌肤开始的减肥的减肥</p>\r\n\r\n<p><img alt=\"\" src=\"http://127.0.0.1/enterprise/uploadfile/substance/201410/1414301759_28039.jpg\" style=\"height:531px; width:800px\" /></p>\r\n\r\n<p>时间开房记录是卡机的付款了是的减肥了开始就爱的分开了</p>\r\n', '2017-01-10 16:14:18');
+INSERT INTO `w_portalpage` VALUES ('3', '联系我们', '<p>历史的肌肤可就是的离开房间SD卡房间里是卡的积分</p>\r\n\r\n<p>实力的开发就是可怜的肌肤</p>\r\n\r\n<p>是打飞机阿士大夫就离开</p>\r\n\r\n<p><img alt=\"\" src=\"http://www.enterprise.com/data/upload/201701/5af12f658d6328ae2e8c3c99a2ed9e96.jpg\" style=\"height:531px; width:800px\" /></p>\r\n\r\n<p>离开是大家看法是理科的肌肤是打发</p>\r\n\r\n<p>是，的卡夫卡时间的方式见对方奥斯卡的房间爱时刻的肌肤开始的减肥阿斯兰的科技弗拉斯柯达复健科就暗示了对方可就是开的房间来看就是了打开房间爱死了肯德基阿斯兰的开发就爱是可怜的叫法是可怜的金风科技是咖啡机 暗示了对方即可</p>\r\n\r\n<p>是的发生的健康</p>\r\n\r\n<p>是打发了深刻的肌肤开始的减肥</p>\r\n', '2017-01-10 16:14:21');
+
+-- ----------------------------
+-- Table structure for `w_sessions`
+-- ----------------------------
+DROP TABLE IF EXISTS `w_sessions`;
+CREATE TABLE `w_sessions` (
   `session_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `session_expires` int(10) unsigned NOT NULL DEFAULT '0',
   `session_data` text,
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- 转存表中的数据 `w_sessions`
---
-
-INSERT INTO `w_sessions` (`session_id`, `session_expires`, `session_data`) VALUES
-('1ntucmivdhel6l752kiecql3t5', 1445915637, '1ntucmivdhel6l752kiecql3t5userinfo_timeout|i:1445915633;1ntucmivdhel6l752kiecql3t5userinfo|a:7:{s:6:"userid";s:1:"3";s:8:"username";s:8:"xpmozong";s:8:"password";s:32:"e10adc3949ba59abbe56e057f20f883e";s:5:"email";s:16:"361131953@qq.com";s:9:"is_active";s:1:"1";s:8:"add_date";s:19:"2015-07-17 17:08:19";s:15:"last_login_date";s:19:"2015-10-08 10:14:08";}'),
-('28un0vc7f81gsqt9noe6mlhto6', 1445914908, ''),
-('cs161hc5788p5g10563ueqtqq2', 1445925399, ''),
-('luj0116pju4nm2jklpas8e1923', 1445914906, ''),
-('vsbbf17cgqt0s61feseqb4gbg6', 1445925434, '');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- ----------------------------
+-- Records of w_sessions
+-- ----------------------------
+INSERT INTO `w_sessions` VALUES ('48ptlpsosbijetbpq3grndida1', '1483692513', '');

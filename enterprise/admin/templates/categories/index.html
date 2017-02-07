@@ -1,23 +1,9 @@
 {%include file="layout/header.html"%}
-<script type="text/javascript">
-// 删除
-var mdelete = function(id){
-    if(window.confirm('确定删除？')){
-        $.getJSON("{%$homeUrl%}categories/delete/"+id, function(data){
-            if(data.code == true){
-                window.location.href = "{%$homeUrl%}categories"
-            }else{
-                alert(data.msg);
-            }
-        })
-    }
-}
-</script>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">分类列表
-                <button type="button" class="btn btn-success btn-xs pull-right" onclick="javascript:location.href='{%$homeUrl%}categories/modify/0'">
+            <h3 class="panel-title">
+                {%$subtitle%}
+                <button type="button" class="btn btn-success btn-xs pull-right" onclick="javascript:location.href='{%$homeUrl%}{%$classname%}/modify/0'">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加分类
                 </button>
             </h3>
@@ -37,7 +23,7 @@ var mdelete = function(id){
                         <td>{%$value.cid%}</td>
                         <td>{%$value.c_name%}</td>
                         <td>
-                            <button type="button" class="btn btn-info btn-xs" onclick="javascript:location.href='{%$homeUrl%}categories/modify/{%$value.cid%}'">修改</button>
+                            <button type="button" class="btn btn-info btn-xs" onclick="javascript:location.href='{%$homeUrl%}{%$classname%}/modify/{%$value.cid%}'">修改</button>
                             |
                             <button type="button" class="btn btn-danger btn-xs" onclick="mdelete({%$value.cid%})">删除</button>
                         </td>
@@ -47,5 +33,19 @@ var mdelete = function(id){
             </table>
         </div>
     </div>
-</div>
+{%include file="layout/loadjs.html"%}
+<script type="text/javascript">
+// 删除
+var mdelete = function(id){
+    if(window.confirm('确定删除？')){
+        $.getJSON("{%$homeUrl%}{%$classname%}/delete/"+id, function(data){
+            if(data.code == true){
+                window.location.href = "{%$homeUrl%}categories"
+            }else{
+                alert(data.msg);
+            }
+        })
+    }
+}
+</script>
 {%include file="layout/footer.html"%}

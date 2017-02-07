@@ -1,0 +1,60 @@
+{%include file="layout/header.html"%}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {%$subtitle%}
+                <button type="button" class="btn btn-success btn-xs pull-right" onclick="javascript:location.href='{%$homeUrl%}{%$classname%}/modify/0'">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加用户组
+                </button>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered datatable">
+                <thead>
+                    <tr>
+                        <th width="8%">ID</th>
+                        <th>名称</th>
+                        <th>状态</th>
+                        <th>备注</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%include file="layout/loadjs.html"%}
+<script type="text/javascript">
+var getData = function() {
+    url = '{%$homeUrl%}{%$classname%}/jsonlist';
+    var aoColumns = [
+        { "mDataProp": "group_id"},
+        { "mDataProp": "group_name"},
+        { "mDataProp": "group_state"},
+        { "mDataProp": "remarks"},
+        { "mDataProp": "operation" }
+    ];
+    KxCommon.kxDataTable(aoColumns, 3, url, 12);
+}
+$(document).ready(function(){
+    getData();
+});
+
+// 修改用户状态
+function enable(group_state,id){
+    var state = 1;
+    if(group_state == 1){
+        state = 0;
+    }
+    $.getJSON("{%$homeUrl%}{%$classname%}/disable?group_state="+state+"&group_id="+id,function(data){
+        if(data.code == true){
+            getData();
+        }else{
+            alert(data.msg);
+        }
+    });
+}
+
+</script>
+{%include file="layout/footer.html"%}

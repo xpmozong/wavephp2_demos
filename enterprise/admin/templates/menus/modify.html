@@ -1,0 +1,88 @@
+{%include file="layout/header.html"%}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {%if $data.menu_id%}修改{%else%}添加{%/if%}菜单
+            </h3>
+        </div>
+        <form enctype="multipart/form-data" id="form-modify" class="form-horizontal" action="{%$homeUrl%}{%$classname%}/modified" method="POST" onsubmit="return checkForm()">
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="menu_id" class="col-sm-2 control-label">父菜单</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="top_id" name="top_id" onchange="menupclass()">
+                    <option value="0">父级</option>
+                    {%foreach from=$menuTree item=value%}
+                        <option value="{%$value.menu_id%}" {%if $value.menu_id == $data.top_id%}selected{%/if%}>{%$value.menu_name%}</option>
+                    {%/foreach%}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="menu_name" class="col-sm-2 control-label">菜单名称</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="menu_name" id="menu_name" type="text" value="{%$data.menu_name%}" placeholder="请输入菜单名称">
+                    <input type="hidden" name="menu_id" value="{%$data.menu_id%}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="menu_url" class="col-sm-2 control-label">URL</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="menu_url" id="menu_url" type="text" placeholder="请输入菜单URL" value="{%$data.menu_url%}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="menu_order" class="col-sm-2 control-label">菜单排序</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="menu_order" id="menu_order" type="text" placeholder="排序" value="{%$data.menu_order%}"  onkeyup="this.value=this.value.replace(/\D/g,'')">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pclass" class="col-sm-2 control-label">pclass</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="pclass" id="pclass" type="text" value="{%$data.pclass%}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pclass" class="col-sm-2 control-label">图标</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="fastyle" id="fastyle" type="text" value="{%$data.fastyle%}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <button type="button" class="btn btn-default m-right100" onclick="javascript:history.go(-1);">
+                        返回
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="save">提交</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+{%include file="layout/loadjs.html"%}
+<script type="text/javascript">
+var checkForm = function(){
+    var menu_name = $("#menu_name").val();
+    if (!menu_name) {
+        alert("请输入菜单名称！");
+        return false;
+    }
+
+    return true;
+}
+function menupclass(){
+    var menuid = $('#top_id').val();
+    $.ajax({
+        type:'post',
+        url:'{%$homeUrl%}{%$classname%}/menupclass',
+        data:{'menuid':menuid},
+        success:function(data){
+            data=eval('('+data+')');
+            $('#pclass').val(data.pclass);
+        }
+    });
+}
+</script>
+{%include file="layout/footer.html"%}

@@ -1,0 +1,109 @@
+{%include file="layout/header.html"%}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {%if $data.group_id%}修改{%else%}添加{%/if%}用户组
+            </h3>
+        </div>
+        <form enctype="multipart/form-data" id="form-modify" class="form-horizontal" action="{%$homeUrl%}{%$classname%}/modified" method="POST" onsubmit="return checkForm()">
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="group_name" class="col-sm-2 control-label">用户组名称</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="group_name" id="group_name" type="text" value="{%$data.group_name%}" placeholder="请输入用户组名称">
+                    <input type="hidden" name="group_id" value="{%$data.group_id%}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="group_state" class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-10">
+                    <label class="radio-inline">
+                        <input type="radio" name="group_state" value="1" {%if $data.group_state==1%}checked{%/if%}> 启用
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="group_state" value="0" {%if $data.group_state==0%}checked{%/if%}> 禁用
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="remarks" class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="remarks" id="remarks" type="text" value="{%$data.remarks%}" placeholder="请输入备注">
+                </div>
+            </div>                    
+            <div class="form-group">
+                <label for="group_name" class="col-sm-2 control-label">分配权限</label>
+                <div class="col-sm-10">
+                    {%foreach from=$menuList1 item="value" key="key"%}
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3 class="box-title checkbox">
+                                <label>
+                                    <input type="checkbox" name="menu_ids[]" id='selectAll{%$value.menu_id%}' onclick="checkAll({%$value.menu_id%})" value="{%$value.menu_id%}" {%if !empty($data.menu_ids) && in_array($value.menu_id, $data.menu_ids)%}checked{%/if%}>
+                                        {%$value.menu_name%}
+                                </label>
+                            </h3>
+                        </div>
+                        <div class="box-body checkbox">
+                        {%foreach from=$value.child item="v" key="k"%}
+                            <label>
+                                <input type="checkbox" name="menu_ids[]" id="setselect{%$value.menu_id%}" onclick="setcheckAll({%$value.menu_id%})" value="{%$v.menu_id%}" {%if !empty($data.menu_ids) && in_array($v.menu_id, $data.menu_ids)%}checked{%/if%}>
+                                    {%$v.menu_name%}
+                            </label>
+                        {%/foreach%}
+                        </div>
+                    </div>
+                    {%/foreach%}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <button type="button" class="btn btn-default m-right100" onclick="javascript:history.go(-1);">
+                        返回
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="save">提交</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+{%include file="layout/loadjs.html"%}
+<script type="text/javascript">
+var checkForm = function(){
+    var group_name = $("#group_name").val();
+    if (!group_name) {
+        alert("请输入用户姓名！");
+        return false;
+    }
+
+    return true;
+}
+
+function checkAll(id){
+    if($('#selectAll'+id).prop('checked')){
+            $("input[id='setselect"+id+"']").each(function(){
+              $(this).prop('checked',true);
+        })
+    }else{
+       $("input[id='setselect"+id+"']").each(function(){
+              $(this).prop('checked',false);
+        }) 
+    }
+}
+
+function setcheckAll(id){
+    $("input[id='setselect"+id+"']").each(function(i,item){
+        var obj = $("input[id='setselect"+id+"']").eq(i)
+         for(var i=0; i<obj.length; i++){
+            if($(obj[i]).prop('checked')==true){
+                $('#selectAll'+id).prop('checked',true);
+                return false;
+            }else{
+                $('#selectAll'+id).prop('checked',false);
+            }
+         }
+    })
+}
+</script>
+{%include file="layout/footer.html"%}

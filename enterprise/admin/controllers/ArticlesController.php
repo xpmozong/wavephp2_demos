@@ -2,20 +2,24 @@
 /**
  * 文章列表控制层
  */
-class ArticlesController extends AdminCommonController
+class ArticlesController extends CommonController
 {
     public function __construct()
     {
         parent::__construct();
-        $this->title = '文章管理';
+        $this->subtitle = '文章管理';
+        $this->pclass = 'cms';
+        $this->classname = 'articles';
+        $this->subname = 'articles';
+        $this->judgePermission($this->subname);
     }
     /**
      * 文章页
      */
     public function actionIndex()
     {
-        $Category = new Category();
-        $this->category = $Category->getAll();
+        $categoryModel = new Category();
+        $this->category = $categoryModel->getAll();
     }
 
     /**
@@ -23,7 +27,7 @@ class ArticlesController extends AdminCommonController
      */
     public function actionJsonlist()
     {
-        $Articles = new Articles();
+        $articlesModel = new Articles();
         $start = (int)$_GET['iDisplayStart'];
         $pagesize = (int)$_GET['iDisplayLength'];
         $where = array();
@@ -31,15 +35,15 @@ class ArticlesController extends AdminCommonController
         if ($this->cid) {
             $where['cid'] = $this->cid;
         }
-        $list = $Articles->where($where)->limit($start, $pagesize)->order('aid')->getAll();
-        $iTotal = $Articles->getCount('*', $where);
+        $list = $articlesModel->where($where)->limit($start, $pagesize)->order('aid')->getAll();
+        $iTotal = $articlesModel->getCount('*', $where);
         $output = array(
             "sEcho" => $_GET['sEcho'],
             "iTotalRecords" => $iTotal,
             "iTotalDisplayRecords" => $iTotal,
             "aaData" => array()
         );
-        $homeUrl = Wave::app()->homeUrl.'articles/modify/';
+        $homeUrl = Wave::app()->homeUrl.$this->classname.'/modify/';
         foreach ($list as $key => $value) {
             $list[$key]['operation'] = '<button type="button" class="btn btn-info btn-xs m-right20" onclick="javascript:location.href=\''.$homeUrl.$value['aid'].'\'">修改</button>';
             $list[$key]['operation'] .= '<button type="button" class="btn btn-danger btn-xs" onclick="mdelete('.$value['aid'].')">删除</button>';
@@ -55,15 +59,18 @@ class ArticlesController extends AdminCommonController
     {
         $id = (int)$id;
         $where = array('a.aid'=>$id);
-        $Articles = new Articles();
-        $Category = new Category();
-        $this->data = $Articles ->select('c.*,a.*')
-                                ->from('articles a')
-                                ->join('articles_content c', 'a.aid=c.aid')
+        $articlesModel = new Articles();
+        $categoryModel = new Category();
+        $this->data = $articlesModel ->select('c.*,a.*')
+                                ->from('w_articles a')
+                                ->join('w_articles_content c', 'a.aid=c.aid')
                                 ->where($where)
                                 ->getOne();
-        $this->data['content'] = stripslashes($this->data['content']);
-        $this->category = $Category->getAll();
+        if (!empty($this->data)) {
+            $this->data['content'] = stripslashes($this->data['content']);
+            $this->data['content'] = htmlspecialchars_decode($this->data['content']);
+        }
+        $this->category = $categoryModel->getAll();
     }
 
     /**
@@ -75,61 +82,27 @@ class ArticlesController extends AdminCommonController
         $aid = (int)$data['aid'];
         $article = $data['aritcle'];
         $content = $data['a_content'];
-        $Articles = new Articles();
-        $ArticlesContent = new ArticlesContent();
+        $content['content'] = htmlspecialchars($content['content']);
+        $articlesModel = new Articles();
+        $articlesContentModel = new ArticlesContent();
         if ($aid == 0) {
             $article['add_date'] = WaveCommon::getDate();
-            $content['aid'] = $Articles->insert($article);
-            $ArticlesContent->insert($content);
+            $content['aid'] = $articlesModel->insert($article);
+            $articlesContentModel->insert($content);
             $article['aid'] = $content['aid'];
         }else{
             $where = array('aid'=>$aid);
-            $Articles->update($article, $where);
-            $count = $ArticlesContent->getCount('*', $where);
+            $articlesModel->update($article, $where);
+            $count = $articlesContentModel->getCount('*', $where);
             if ($count > 0) {
-                $ArticlesContent->update($content, $where);
+                $articlesContentModel->update($content, $where);
             }else{
                 $content['aid'] = $aid;
-                $ArticlesContent->insert($content);
+                $articlesContentModel->insert($content);
             }
         }
 
-        $this->jumpBox('成功！', Wave::app()->homeUrl.'articles', 1);
-    }
-
-    /**
-     * 上传图片
-     */
-    public function actionUpload()
-    {
-        $fn = $_GET['CKEditorFuncNum'];
-        $url = WaveCommon::getCompleteUrl();
-        $imgTypeArr = WaveCommon::getImageTypes();
-        if(!in_array($_FILES['upload']['type'], $imgTypeArr)){
-            echo '<script type="text/javascript">
-                window.parent.CKEDITOR.tools.callFunction("'.$fn.'","","图片格式错误！");
-                </script>';
-        }else{
-            $projectPath = Wave::app()->projectPath;
-            $uploadPath = $projectPath.'data/uploadfile/articles';
-            if(!is_dir($uploadPath)) mkdir($uploadPath, 0777);
-            $ym = WaveCommon::getYearMonth();
-            $uploadPath .= '/'.$ym;
-            if(!is_dir($uploadPath)) mkdir($uploadPath, 0777);
-
-            $imgType = strtolower(substr(strrchr($_FILES['upload']['name'],'.'),1));
-            $imageName = time().'_'.rand().'.'.$imgType;
-
-            $file_abso = $url.'/data/uploadfile/articles/'.$ym.'/'.$imageName;
-            $SimpleImage = new SimpleImage();
-            $SimpleImage->load($_FILES['upload']['tmp_name']);
-            $SimpleImage->resizeToWidth(800);
-            $SimpleImage->save($uploadPath.'/'.$imageName);
-
-            echo '<script type="text/javascript">
-                window.parent.CKEDITOR.tools.callFunction("'.$fn.'","'.$file_abso.'","上传成功");
-                </script>';
-        }
+        $this->jumpBox('成功！', Wave::app()->homeUrl.$this->classname, 1);
     }
 
     /**
@@ -139,10 +112,10 @@ class ArticlesController extends AdminCommonController
     {
         $id = (int)$id;
         $where = array('aid'=>$id);
-        $Articles = new Articles();
-        $Articles->delete($where);
-        $ArticlesContent = new ArticlesContent();
-        $ArticlesContent->delete($where);
+        $articlesModel = new Articles();
+        $articlesModel->delete($where);
+        $articlesContentModel = new ArticlesContent();
+        $articlesContentModel->delete($where);
         WaveCommon::exportResult(true, '成功！');
     }
 }

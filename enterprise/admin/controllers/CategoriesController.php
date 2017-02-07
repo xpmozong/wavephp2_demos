@@ -2,12 +2,16 @@
 /**
  * 文章分类控制层
  */
-class CategoriesController extends AdminCommonController
+class CategoriesController extends CommonController
 {
     public function __construct()
     {
         parent::__construct();
-        $this->title = '分类管理';
+        $this->subtitle = '分类管理';
+        $this->pclass = 'cms';
+        $this->classname = 'categories';
+        $this->subname = 'categories';
+        $this->judgePermission($this->subname);
     }
 
     /**
@@ -15,8 +19,8 @@ class CategoriesController extends AdminCommonController
      */
     public function actionIndex()
     {
-        $Category = new Category();
-        $this->list = $Category->getAll();
+        $categoryModel = new Category();
+        $this->list = $categoryModel->getAll();
     }
 
     /**
@@ -25,8 +29,8 @@ class CategoriesController extends AdminCommonController
     public function actionModify($cid)
     {
         $cid = (int)$cid;
-        $Category = new Category();
-        $this->data = $Category->getOne('*', array('cid'=>$cid));
+        $categoryModel = new Category();
+        $this->data = $categoryModel->getOne('*', array('cid'=>$cid));
     }
 
     /**
@@ -34,17 +38,17 @@ class CategoriesController extends AdminCommonController
      */
     public function actionModified()
     {
-        $Category = new Category();
+        $categoryModel = new Category();
         $data = WaveCommon::getFilter($_POST);
         $cid = (int)$data['cid'];
         unset($data['cid']);
         if ($cid == 0) {
-            $Category->insert($data);
+            $categoryModel->insert($data);
         }else{
-            $Category->update($data, array('cid'=>$cid));
+            $categoryModel->update($data, array('cid'=>$cid));
         }
 
-        $this->jumpBox('成功！', Wave::app()->homeUrl.'categories', 1);
+        $this->jumpBox('成功！', Wave::app()->homeUrl.$this->classname, 1);
     }
 
     /**
@@ -53,8 +57,8 @@ class CategoriesController extends AdminCommonController
     public function actionDelete($id)
     {
         $id = (int)$id;
-        $Category = new Category();
-        $Category->delete(array('cid'=>$id));
+        $categoryModel = new Category();
+        $categoryModel->delete(array('cid'=>$id));
         WaveCommon::exportResult(true, '成功！');
     }
 

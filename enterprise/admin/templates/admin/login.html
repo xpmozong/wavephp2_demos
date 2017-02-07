@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$title%}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="{%$baseUrl%}/resouce/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="{%$baseUrl%}/resouce/css/admin.css" rel="stylesheet">
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="{%$baseUrl%}/resouce/bootstrap/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="{%$baseUrl%}/resouce/bootstrap/js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div class="container">
+    <div class="con-login">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">{%$title%}登录</h3>
+            </div>
+            <div class="panel-body">
+                <form method="post" class="form-signin" role="form" id="login-form" action="{%$homeUrl%}admin/login" onsubmit="return checkForm()">
+                    <div class="form-group" id="login-form">
+                        <label for="email">邮箱</label>
+                        <input id="email" type="text" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">密码</label>
+                        <input id="password" type="password" name="password" class="form-control">
+                    </div>
+                    <button class="btn btn-success" id="submit" type="submit">
+                        登录
+                    </button>
+                    <div class="form-group m-top10">
+                        {%$error_msg%}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{%$baseUrl%}/resouce/js/jquery.min.js"></script>
+<script type="text/javascript">
+var checkForm = function(){
+    var email = $("#email").val();
+    var password = $("#password").val();
+    if(!email){
+        alert("请输入邮箱！");
+        return false;
+    }
+    if(!password){
+        alert("请输入密码！");
+        return false;
+    }
+}
+</script>
+</body>
+</html>

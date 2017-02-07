@@ -2,12 +2,16 @@
 /**
  * 友情链接控制层
  */
-class LinksController extends AdminCommonController
+class LinksController extends CommonController
 {
     public function __construct()
     {
         parent::__construct();
-        $this->title = '友情链接';
+        $this->subtitle = '友情链接';
+        $this->pclass = 'cms';
+        $this->classname = 'links';
+        $this->subname = 'links';
+        $this->judgePermission($this->subname);
     }
 
     /**
@@ -44,7 +48,7 @@ class LinksController extends AdminCommonController
             $Links->update($data, array('lid'=>$id));
         }
 
-        $this->jumpBox('成功！', Wave::app()->homeUrl.'links', 1);
+        $this->jumpBox('成功！', Wave::app()->homeUrl.$this->classname, 1);
     }
 
     /**

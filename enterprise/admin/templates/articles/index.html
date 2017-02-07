@@ -1,84 +1,18 @@
 {%include file="layout/header.html"%}
-<script type="text/javascript">
-// 删除
-var mdelete = function(id){
-    if(window.confirm('确定删除？')){
-        $.getJSON("{%$homeUrl%}articles/delete/"+id, function(data){
-            if(data.code == true){
-                window.location.href = "{%$homeUrl%}articles";
-            }else{
-                alert(data.msg);
-            }
-        })
-    }
-}
-
-var resultDataTable;
-var getData = function(url) {
-    if (resultDataTable) {
-        $(".datatable").dataTable().fnDestroy();
-    }
-    $(".datatable tbody").html('<tr><td colspan="7">正在加载中...</td></tr>');
-
-    resultDataTable = $(".datatable").dataTable({
-        "sAjaxSource"       : url,
-        "bFilter"           : false,            //是否显示搜索
-        "bProcessing"       : false,
-        "bServerSide"       : true,
-        "bLengthChange"     : false,
-        "sPaginationType"   : "full_numbers",
-        "iDisplayLength"    : 12,
-        "bSort"             : false,
-        "iDisplayStart"     : 0,
-        "bAutoWidth"        :false,
-        "aoColumns"         : [
-            { "mDataProp": "aid"},
-            { "mDataProp": "title" },
-            { "mDataProp": "add_date"},
-            { "mDataProp": "operation"}
-        ],
-        "oLanguage" : {
-            "sProcessing"   : "正在加载中......",
-            "sZeroRecords"  : "没有数据！",
-            "sEmptyTable"   : "表中无数据存在！",
-            "sInfo"         : "第 _START_ 至 _END_ 条 (共 _TOTAL_ 条)",
-            "sInfoEmpty"    : "显示0到0条记录",
-            "oPaginate"     : {
-                "sFirst"    : "第一页",
-                "sPrevious" : "上一页",
-                "sNext"     : "下一页",
-                "sLast"     : "最后一页"
-            }
-        }
-    });
-}
-
-$(document).ready(function(){
-    url = '{%$homeUrl%}articles/jsonlist';
-    getData(url);
-});
-
-var searchData = function() {
-    var cid = $("#cid").val();
-    url = '{%$homeUrl%}articles/jsonlist?cid='+cid;
-    getData(url);
-}
-
-</script>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">职位列表
-                <button type="button" class="btn btn-success btn-xs pull-right" onclick="javascript:location.href='{%$homeUrl%}articles/modify/0'">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加职位
+            <h3 class="panel-title">
+                {%$subtitle%}
+                <button type="button" class="btn btn-success btn-xs pull-right" onclick="javascript:location.href='{%$homeUrl%}{%$classname%}/modify/0'">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加文章
                 </button>
             </h3>
         </div>
         <div class="panel-body">
             <div class="info">
                 <form>
-                    职位类别：
-                    <select name="cid" id="cid" class="form-control" onchange="searchData()" style="display:inline;width:150px;">
+                    文章分类：
+                    <select name="cid" id="cid" class="form-control" onchange="getData()" style="display:inline;width:150px;">
                         {%foreach from=$category item="value" key="key" %}
                             <option {%if $value.cid == $cid%} selected {%/if%} value="{%$value.cid%}">
                                 {%$value.c_name%}
@@ -102,5 +36,35 @@ var searchData = function() {
             </table>
         </div>
     </div>
-</div>
+{%include file="layout/loadjs.html"%}
+<script type="text/javascript">
+var getData = function() {
+    var cid = $("#cid").val();
+    url = '{%$homeUrl%}{%$classname%}/jsonlist?cid='+cid;
+    var aoColumns = [
+        { "mDataProp": "aid"},
+        { "mDataProp": "title" },
+        { "mDataProp": "add_date"},
+        { "mDataProp": "operation"}
+    ];
+    KxCommon.kxDataTable(aoColumns, 3, url, 12);
+}
+$(document).ready(function(){
+    getData();
+});
+
+// 删除
+var mdelete = function(id){
+    if(window.confirm('确定删除？')){
+        $.getJSON("{%$homeUrl%}{%$classname%}/delete/"+id, function(data){
+            if(data.code == true){
+                window.location.href = "{%$homeUrl%}{%$classname%}";
+            }else{
+                alert(data.msg);
+            }
+        })
+    }
+}
+
+</script>
 {%include file="layout/footer.html"%}

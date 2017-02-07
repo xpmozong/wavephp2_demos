@@ -30,8 +30,8 @@ class Articles extends Model
         //                 ->getAll();
 
         // $array = $this  ->select('*')
-        //                 ->from('articles a')
-        //                 ->join('category c', 'a.cid=c.cid')
+        //                 ->from('w_articles a')
+        //                 ->join('w_category c', 'a.cid=c.cid')
         //                 ->getAll();
 
         // $array = $this ->getAll();

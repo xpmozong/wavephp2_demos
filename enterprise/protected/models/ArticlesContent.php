@@ -5,7 +5,7 @@
 class ArticlesContent extends Model
 {
     protected function init() {
-        $this->_tableName = 'articles_content';
+        $this->_tableName = $this->getTablePrefix().'articles_content';
     }
 }
 ?>

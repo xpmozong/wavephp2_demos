@@ -2,7 +2,7 @@
 /**
  * 网站默认入口控制层
  */
-class SiteController extends CommonController
+class SiteController extends FController
 {
        
     public function __construct()
@@ -15,18 +15,12 @@ class SiteController extends CommonController
      */
     public function actionIndex()
     {
-        $Articles = new Articles();
-        $this->list = $Articles ->select('a.aid,a.title,a.add_date,c.c_name')
-                                ->from('articles a')
-                                ->join('category c', 'a.cid=c.cid')
-                                ->limit(0, 12)
-                                ->order('a.aid', 'desc')
-                                ->getAll();
+        
     }
 
     public function actionTestLang()
     {
-        i18n::$lang = 'vi-vn';
+        I18n::$lang = 'vi-vn';
         echo i18n::get('平台管理')."<br>";
     }
 

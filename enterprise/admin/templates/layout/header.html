@@ -3,11 +3,56 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{%$title%}</title>
-<link type="text/css" rel="stylesheet" href="{%$baseUrl%}/resouce/bootstrap/css/bootstrap.min.css"/>
-<link type="text/css" rel="stylesheet" href="{%$baseUrl%}/resouce/css/admin.css"/>
-<script type="text/javascript" src="{%$baseUrl%}/resouce/dataTables/media/js/jquery.js"></script>
-<script type="text/javascript" src="{%$baseUrl%}/resouce/bootstrap/js/bootstrap.min.js"></script>
-<script src="{%$baseUrl%}/resouce/dataTables/media/js/jquery.dataTables.min.js"></script>
-<script src="{%$baseUrl%}/resouce/dataTables/media/js/dataTables.bootstrap.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="{%$baseUrl%}/resouce/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="{%$baseUrl%}/resouce/css/admin.css" rel="stylesheet">
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="{%$baseUrl%}/resouce/bootstrap/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="{%$baseUrl%}/resouce/bootstrap/js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">{%$shortitle%}</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{%$homeUrl%}">{%$title%}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{%$homeUrl%}member">个人管理</a></li>
+                <li><a href="{%$homeUrl%}admin/logout">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-sm-3 col-md-2 admin-sidebar">
+            <div class="main-slider">
+                {%foreach from=$menuList item="value" key="key"%}
+                <h4>{%$value.menu_name%}</h4>
+                <div class="list-group">
+                    {%foreach from=$value.child item="v" key="k"%}
+                    <a href="{%$homeUrl%}{%$v.menu_url%}" class="list-group-item {%if $subname==$v.menu_url%}active{%/if%}">
+                        {%$v.menu_name%}
+                    </a>
+                    {%/foreach%}
+                </div>
+                {%/foreach%}
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

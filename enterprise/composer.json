@@ -4,9 +4,11 @@
     },
     "autoload": {
         "classmap": [
+            "protected/config",
             "protected/controllers",
             "protected/models",
-            "admin/controllers"
+            "admin/controllers",
+            "admin/models"
         ]
     },
     "minimum-stability": "dev"
