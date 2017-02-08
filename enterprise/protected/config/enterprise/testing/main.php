@@ -3,11 +3,10 @@ $config = array(
     'projectName'                   => 'protected',
     'modelName'                     => 'protected',
     'projectTitle'                  => 'CMS',
-
     'defaultController'             => 'site',
-    'isUseSmarty'                   => true,
 
     'smarty'                        => array(
+        'is_on'                     => true,    // 是否使用smarty模板
         'left_delimiter'            => '{%',
         'right_delimiter'           => '%}',
         'debugging'                 => false,
