@@ -6,7 +6,7 @@ class FrontMenus extends Model
 {
     protected function init(){
         $this->_tableName = $this->getTablePrefix().'front_menus';
-        $this->cache = Wave::app()->redis;
+        // $this->cache = Wave::app()->redis;
     }
 
     /**

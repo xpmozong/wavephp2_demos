@@ -18,17 +18,17 @@ $config = array(
         'cache_dir'                 => 'data/templates/cache/index',
         'compile_dir'               => 'data/templates/compile/index'
     ),
-    
+
     'debuger'                       => false,       // 显示debug信息
     'crash_show_sql'                => true,        // 是否显示错误sql
-    
+
     'ini_set'                       => array(
         'session.cookie_domain'     => '.enterprise.com', // session跨域设置
         'session.cache_expire'      => '',
         'session.use_cookies'       => 1,
         'session.auto_start'        => 1
     ),
-    
+
     'database'                      => array(
         'driver'                    => 'wmysqli',
         'master'                    => array(
@@ -43,7 +43,7 @@ $config = array(
         )
     ),
     'session'                       => array(
-        'driver'                    => 'redis',
+        'driver'                    => 'db',
         'timeout'                   => 86400
     ),
 
@@ -66,31 +66,18 @@ $config = array(
         'timeout'                   => 86400*30
     ),
 
-    'mail_config'                   => array(
-        'host'                      => 'smtp.quakegame.cn',
-        'username'                  => 'service@quakegame.cn',
-        'password'                  => 'h35f5H566T',
-        'port'                      => 25
-    ),
+    // 'memcache'                      => array(
+    //     array(
+    //         'host'                  => 'localhost',
+    //         'port'                  => 11211
+    //     ),
+    // ),
 
-    'memcache'                      => array(
-        array(
-            'host'                  => 'localhost',
-            'port'                  => 11211
-        ),
-    ),
-
-    'redis'                         => array(
-        'master'                    => array(
-            'host'                  => '127.0.0.1',
-            'port'                  => 6379
-        ),
-        'slave'                     => array(
-            array(
-                'host'              => '127.0.0.1',
-                'port'              => 6379
-            )
-        )
-    )
+    // 'redis'                         => array(
+    //     'master'                    => array(
+    //         'host'                  => '127.0.0.1',
+    //         'port'                  => 6379
+    //     )
+    // )
 );
 ?>

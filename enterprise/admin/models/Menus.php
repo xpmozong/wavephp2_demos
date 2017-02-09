@@ -6,7 +6,7 @@ class Menus extends Model
 {
     protected function init(){
         $this->_tableName = 'b_menus';
-        $this->cache = Wave::app()->redis;
+        // $this->cache = Wave::app()->redis;
     }
 
     /**

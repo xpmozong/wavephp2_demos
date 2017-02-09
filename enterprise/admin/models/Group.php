@@ -7,7 +7,7 @@ class Group extends Model
     protected function init()
     {
         $this->_tableName = 'b_users_group';
-        $this->cache = Wave::app()->redis;
+        // $this->cache = Wave::app()->redis;
     }
 
     public function getgroup($groupid)

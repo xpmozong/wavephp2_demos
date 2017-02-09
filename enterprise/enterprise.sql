@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-01-12 10:52:27
+Date: 2017-02-09 21:32:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,11 +29,7 @@ CREATE TABLE `b_admin_log` (
   `client_ip` char(15) NOT NULL DEFAULT '' COMMENT 'IP地址',
   `time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=631 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
--- ----------------------------
--- Records of b_admin_log
--- ----------------------------
+) ENGINE=MyISAM AUTO_INCREMENT=636 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Table structure for `b_menus`
@@ -87,7 +83,7 @@ CREATE TABLE `b_users` (
 -- ----------------------------
 -- Records of b_users
 -- ----------------------------
-INSERT INTO `b_users` VALUES ('1', 'admin', 'aec6f39178f278c8e071ec9237697c20', '1', '361131953@qq.com', '1', '', '2015-08-08 14:35:43', '2017-01-10 17:57:44');
+INSERT INTO `b_users` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', '361131953@qq.com', '1', '', '2015-08-08 14:35:43', '2017-02-09 14:30:15');
 
 -- ----------------------------
 -- Table structure for `b_users_group`
@@ -266,8 +262,3 @@ CREATE TABLE `w_sessions` (
   `session_data` text,
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of w_sessions
--- ----------------------------
-INSERT INTO `w_sessions` VALUES ('48ptlpsosbijetbpq3grndida1', '1483692513', '');
