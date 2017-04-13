@@ -23,7 +23,7 @@ $config = array(
     'crash_show_sql'                => false,        // 是否显示错误sql
 
     'ini_set'                       => array(
-        'session.cookie_domain'     => '.yantujy.com', // session跨域设置
+        'session.cookie_domain'     => '.enterprise.com', // session跨域设置
         'display_errors'            => 1,
     ),
 
@@ -60,7 +60,7 @@ $config = array(
     // ),
 
     'cookie'                        => array(
-        'domain'                    => '.yantujy.com',
+        'domain'                    => '.enterprise.com',
         'timeout'                   => 86400*30
     ),
 
