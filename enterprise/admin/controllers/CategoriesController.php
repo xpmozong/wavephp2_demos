@@ -12,6 +12,7 @@ class CategoriesController extends CommonController
         $this->classname = 'categories';
         $this->subname = 'categories';
         $this->judgePermission($this->subname);
+        $this->listCateArr = array('文章', '图片');
     }
 
     /**
@@ -21,6 +22,9 @@ class CategoriesController extends CommonController
     {
         $categoryModel = new Category();
         $this->list = $categoryModel->getAll();
+        foreach ($this->list as $key => $value) {
+            $this->list[$key]['listname'] = $this->listCateArr[$value['list_cate']];
+        }
     }
 
     /**

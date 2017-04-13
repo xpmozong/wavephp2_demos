@@ -2,7 +2,7 @@
 $config = array(
     'projectName'                   => 'protected',
     'modelName'                     => 'protected',
-    'projectTitle'                  => 'CMS',
+    'projectTitle'                  => '沿途画室',
     'defaultController'             => 'site',
 
     'smarty'                        => array(
@@ -20,19 +20,17 @@ $config = array(
     ),
 
     'debuger'                       => false,       // 显示debug信息
-    'crash_show_sql'                => true,        // 是否显示错误sql
+    'crash_show_sql'                => false,        // 是否显示错误sql
 
     'ini_set'                       => array(
-        'session.cookie_domain'     => '.enterprise.com', // session跨域设置
-        'session.cache_expire'      => '',
-        'session.use_cookies'       => 1,
-        'session.auto_start'        => 1
+        'session.cookie_domain'     => '.yantujy.com', // session跨域设置
+        'display_errors'            => 1,
     ),
 
     'database'                      => array(
         'driver'                    => 'wmysqli',
         'master'                    => array(
-            'dbhost'                => '127.0.0.1',
+            'dbhost'                => 'localhost',
             'dbport'                => 3306,
             'username'              => 'root',
             'password'              => '',
@@ -62,7 +60,7 @@ $config = array(
     // ),
 
     'cookie'                        => array(
-        'domain'                    => '.enterprise.com',
+        'domain'                    => '.yantujy.com',
         'timeout'                   => 86400*30
     ),
 
@@ -73,11 +71,12 @@ $config = array(
     //     ),
     // ),
 
-    // 'redis'                         => array(
-    //     'master'                    => array(
-    //         'host'                  => '127.0.0.1',
-    //         'port'                  => 6379
-    //     )
-    // )
+    'redis'                 => array(
+        'master'            => array(
+            'host'          => '106.75.61.203',
+            'port'          => 16379,
+            'prefix'        => 'en_'
+        )
+    ),
 );
 ?>

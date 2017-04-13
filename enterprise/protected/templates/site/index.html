@@ -10,30 +10,26 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img src="{%$baseUrl%}/resouce/images/slide-01.jpg" alt="First slide">
+                <img src="http://7xr7ff.com1.z0.glb.clouddn.com/1.jpg" alt="First slide">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>Example headline.</h1>
-                        <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
+                        <p>沿途美术培训</p>
                     </div>
                 </div>
             </div>
             <div class="item">
-                <img src="{%$baseUrl%}/resouce/images/slide-02.jpg" alt="Second slide">
+                <img src="http://7xr7ff.com1.z0.glb.clouddn.com/2.jpg" alt="Second slide">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                        <p>沿途教育  专注名校  从未改变</p>
                     </div>
                 </div>
             </div>
             <div class="item">
-                <img src="{%$baseUrl%}/resouce/images/slide-03.jpg" alt="Third slide">
+                <img src="http://7xr7ff.com1.z0.glb.clouddn.com/3.jpg" alt="Third slide">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>One more for good measure.</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <p>沿途成绩</p>
                     </div>
                 </div>
             </div>
@@ -48,11 +44,109 @@
         </a>
     </div><!-- /.carousel -->
 
-    <div class="container">
+    <div class="container" id="container">
+        <div class="main-title">
+            <h3 class="text-center">优秀作品</h3>
+        </div>
+        <div class="row">
+            {%foreach from=$list1 item="value" key="key" %}
+            <div class="item">
+                <div class="tc-gridbox">
+                    <div class="header">
+                        <div class="item-image">
+                            <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">
+                                <img class="img-responsive" src="{%$value.img%}" alt="{%$value.title%}">
+                            </a>
+                        </div>
+                        <h3>
+                        <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">{%$value.title%}</a>
+                        </h3>
+                        <hr>
+                    </div>
+                    <div class="body">
+                        <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">{%$value.intro%}</a>
+                    </div>
+                </div>
+            </div>
+            {%/foreach%}
+        </div>
 
-        <div class="starter-template">
-            <h1>CMS企业网站</h1>
-            <p class="lead">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+        <div class="main-title">
+            <h3 class="text-center">教师团队</h3>
+        </div>
+        <div class="row">
+            {%foreach from=$list2 item="value" key="key" %}
+            <div class="item">
+                <div class="tc-gridbox">
+                    <div class="header">
+                        <div class="item-image">
+                            <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">
+                                <img class="img-responsive" src="{%$value.img%}" alt="{%$value.title%}">
+                            </a>
+                        </div>
+                        <h3>
+                        <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">{%$value.title%}</a>
+                        </h3>
+                        <hr>
+                    </div>
+                    <div class="body">
+                        <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">{%$value.intro%}</a>
+                    </div>
+                </div>
+            </div>
+            {%/foreach%}
+        </div>
+
+        <div class="main-title">
+            <h3 class="text-center">校园记录</h3>
+        </div>
+        <div class="row">
+            {%foreach from=$list3 item="value" key="key" %}
+            <div class="item">
+                <div class="tc-gridbox">
+                    <div class="header">
+                        <div class="item-image">
+                            <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">
+                                <img class="img-responsive" src="{%$value.img%}" alt="{%$value.title%}">
+                            </a>
+                        </div>
+                        <h3>
+                        <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">{%$value.title%}</a>
+                        </h3>
+                        <hr>
+                    </div>
+                    <div class="body">
+                        <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">{%$value.intro%}</a>
+                    </div>
+                </div>
+            </div>
+            {%/foreach%}
+        </div>
+
+        <div class="main-title">
+            <h3 class="text-center">高考咨询</h3>
+        </div>
+        <div class="row">
+            {%foreach from=$list4 item="value" key="key" %}
+            <div class="item">
+                <div class="tc-gridbox">
+                    <div class="header">
+                        <div class="item-image">
+                            <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">
+                                <img class="img-responsive" src="{%$value.img%}" alt="{%$value.title%}">
+                            </a>
+                        </div>
+                        <h3>
+                        <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">{%$value.title%}</a>
+                        </h3>
+                        <hr>
+                    </div>
+                    <div class="body">
+                        <a href="{%$homeUrl%}{%$classname%}/article?cid={%$cid%}&aid={%$value.aid%}">{%$value.intro%}</a>
+                    </div>
+                </div>
+            </div>
+            {%/foreach%}
         </div>
 
     </div><!-- /.container -->

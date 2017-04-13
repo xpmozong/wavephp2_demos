@@ -15,7 +15,24 @@ class SiteController extends FController
      */
     public function actionIndex()
     {
-        
+        $articlesModel = new Articles();
+        $this->classname = 'category';
+        $this->list1 = $articlesModel->select('*')
+                                ->in(array('cid'=>'7,8,9'))
+                                ->order('aid')->limit(0,4)
+                                ->getAll();
+        $this->list2 = $articlesModel->select('*')
+                                ->in(array('cid'=>'6'))
+                                ->order('aid')->limit(0,4)
+                                ->getAll();
+        $this->list3 = $articlesModel->select('*')
+                                ->in(array('cid'=>'11,12,13'))
+                                ->order('aid')->limit(0,4)
+                                ->getAll();
+        $this->list4 = $articlesModel->select('*')
+                                ->in(array('cid'=>'5'))
+                                ->order('aid')->limit(0,4)
+                                ->getAll();
     }
 
     public function actionTestLang()

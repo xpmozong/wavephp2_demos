@@ -8,7 +8,7 @@ class PageController extends FController
     public function __construct()
     {
         parent::__construct();
-        $this->classname = 'page';
+        $this->classname = Wave::getClassName();
     }
 
     public function actionIndex()

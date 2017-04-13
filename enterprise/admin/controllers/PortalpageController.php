@@ -40,7 +40,7 @@ class PortalpageController extends CommonController
         );
         $homeUrl = Wave::app()->homeUrl.$this->classname.'/modify/';
         foreach ($list as $key => $value) {
-            $list[$key]['operation'] = '<button type="button" class="btn btn-info btn-xs m-right20" onclick="javascript:location.href=\''.$homeUrl.$value['pid'].'\'">修改</button>';
+            $list[$key]['operation'] = '<button type="button" class="btn btn-info btn-xs" onclick="javascript:location.href=\''.$homeUrl.$value['pid'].'\'">修改</button> | ';
             $list[$key]['operation'] .= '<button type="button" class="btn btn-danger btn-xs" onclick="mdelete('.$value['pid'].')">删除</button>';
         }
         $output['aaData'] = $list;

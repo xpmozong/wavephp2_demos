@@ -8,14 +8,25 @@ class CategoryController extends FController
     public function __construct()
     {
         parent::__construct();
-        $this->classname = 'category';
+        $this->classname = Wave::getClassName();
     }
 
     public function actionIndex()
     {
-        $this->cid = $this->getRequest()->getInt('cid');
+        $this->cid = $this->getRequest()->getInt('cid', 1);
         $categoryModel = new Category();
-        $this->category = $categoryModel->order('cate_order')->getAll('*');
+        $this->category = $categoryModel->getOne('*', array('cid'=>$this->cid));
+
+        $page = $this->getRequest()->getInt('page', 1);
+        $pagesize = 20;
+        $start = ($page - 1) * $pagesize;
+        $articlesModel = new Articles();
+        $where = array();
+        $where['cid'] = $this->cid;
+        $this->list = $articlesModel->where($where)->limit($start, $pagesize)->order('aid')->getAll();
+        $allcount = $articlesModel->getCount('*', $where);
+        $commonModel = new Common();
+        $this->pagebar = $commonModel->getPageBar($this->homeUrl, $allcount, $pagesize, $page);
     }
 
     /**
@@ -27,10 +38,8 @@ class CategoryController extends FController
         $start = (int)$_GET['iDisplayStart'];
         $pagesize = (int)$_GET['iDisplayLength'];
         $where = array();
-        $this->cid = isset($_GET['cid']) ? (int)$_GET['cid'] : 1;
-        if ($this->cid) {
-            $where['cid'] = $this->cid;
-        }
+        $cid = $this->getRequest()->getInt('cid', 1);
+        $where['cid'] = $cid;
         $list = $articlesModel->where($where)->limit($start, $pagesize)->order('aid')->getAll();
         $iTotal = $articlesModel->getCount('*', $where);
         $output = array(
@@ -39,7 +48,6 @@ class CategoryController extends FController
             "iTotalDisplayRecords" => $iTotal,
             "aaData" => array()
         );
-        $homeUrl = Wave::app()->homeUrl.$this->classname.'/modify/';
         foreach ($list as $key => $value) {
             $list[$key]['title'] = '<a href="'.Wave::app()->homeUrl.$this->classname.'/article?cid='.$value['cid'].'&aid='.$value['aid'].'">'.$value['title'].'</a>';
         }
@@ -52,10 +60,6 @@ class CategoryController extends FController
      */
     public function actionArticle()
     {
-        $this->cid = $this->getRequest()->getInt('cid');
-        $categoryModel = new Category();
-        $this->category = $categoryModel->order('cate_order')->getAll('*');
-
         $aid = $this->getRequest()->getInt('aid');
         $where = array('a.aid'=>$aid);
         $articlesModel = new Articles();

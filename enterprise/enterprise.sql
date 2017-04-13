@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-12 17:33:02
+Date: 2017-04-13 11:00:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,11 +29,16 @@ CREATE TABLE `b_admin_log` (
   `client_ip` char(15) NOT NULL DEFAULT '' COMMENT 'IP地址',
   `time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=680 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=685 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of b_admin_log
 -- ----------------------------
+INSERT INTO `b_admin_log` VALUES ('680', '', '', '登录', 'email=361131953@qq.com | password=123456 | ', '0', '127.0.0.1', '1491990129');
+INSERT INTO `b_admin_log` VALUES ('681', '', '', '登录', 'email=361131953@qq.com | password=123456 | ', '0', '127.0.0.1', '1491990136');
+INSERT INTO `b_admin_log` VALUES ('682', '', '', '登录', 'email=361131953@qq.com | password=xuping422 | ', '0', '127.0.0.1', '1491990143');
+INSERT INTO `b_admin_log` VALUES ('683', 'admin', '', '登录', 'email=361131953@qq.com | ', '1', '127.0.0.1', '1491990160');
+INSERT INTO `b_admin_log` VALUES ('684', 'admin', '', '登录', 'email=361131953@qq.com | ', '1', '127.0.0.1', '1491990550');
 
 -- ----------------------------
 -- Table structure for `b_menus`
@@ -87,7 +92,7 @@ CREATE TABLE `b_users` (
 -- ----------------------------
 -- Records of b_users
 -- ----------------------------
-INSERT INTO `b_users` VALUES ('1', 'admin', '7e8ae30658965420b3e8ed0eea6ba412', '1', '361131953@qq.com', '1', '', '2015-08-08 14:35:43', '2017-02-10 14:32:19');
+INSERT INTO `b_users` VALUES ('1', 'admin', '7e8ae30658965420b3e8ed0eea6ba412', '1', '361131953@qq.com', '1', '', '2015-08-08 14:35:43', '2017-04-12 17:49:10');
 
 -- ----------------------------
 -- Table structure for `b_users_group`
@@ -115,6 +120,7 @@ DROP TABLE IF EXISTS `w_articles`;
 CREATE TABLE `w_articles` (
   `aid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL COMMENT '标题',
+  `intro` varchar(255) DEFAULT NULL COMMENT '文章简介',
   `img` varchar(100) DEFAULT NULL,
   `cid` int(11) NOT NULL DEFAULT '0' COMMENT '文章分类id',
   `add_date` datetime DEFAULT NULL COMMENT '添加时间',
@@ -124,31 +130,31 @@ CREATE TABLE `w_articles` (
 -- ----------------------------
 -- Records of w_articles
 -- ----------------------------
-INSERT INTO `w_articles` VALUES ('1', '中央美术学院', 'http://7xs3jl.com1.z0.glb.clouddn.com/meiyuantubiao%E5%A4%AE%E7%BE%8E.png', '5', '2014-10-26 15:43:00');
-INSERT INTO `w_articles` VALUES ('2', '2016年普通高校招生志愿填报及录取有关规定', '', '3', '2014-10-26 15:43:00');
-INSERT INTO `w_articles` VALUES ('3', '中国美术学院', 'http://7xs3jl.com1.z0.glb.clouddn.com/meiyuantubiao%E5%9B%BD%E7%BE%8E.png', '5', '2014-10-26 15:43:00');
-INSERT INTO `w_articles` VALUES ('4', '2016年河南省高考分数线', '', '3', '2014-10-26 15:43:00');
-INSERT INTO `w_articles` VALUES ('5', '江苏大学新生要参加“防骗考” 不达80分要重考', '', '3', '2014-10-26 15:43:00');
-INSERT INTO `w_articles` VALUES ('6', '2016统考美术要求', '', '3', '2014-10-26 15:43:00');
-INSERT INTO `w_articles` VALUES ('7', '沿途历年学员录取名单', 'http://7xs3jl.com1.z0.glb.clouddn.com/jiazhangshouche%20001.jpg', '2', '2014-10-26 15:43:00');
-INSERT INTO `w_articles` VALUES ('8', '2016校考成绩', 'http://7xs3jl.com1.z0.glb.clouddn.com/xiaokaozheng%E4%BD%95%E4%BC%A0%E7%8E%BA%E5%A4%AE%E7%BE%8E.jpg', '1', '2017-01-05 18:35:21');
-INSERT INTO `w_articles` VALUES ('9', '清华美术学院', 'http://7xs3jl.com1.z0.glb.clouddn.com/meiyuantubiao%E6%B8%85%E7%BE%8E.jpg', '5', '2017-02-10 07:01:03');
-INSERT INTO `w_articles` VALUES ('10', '河南：165所院校艺术类招生使用校考成绩录取', '', '3', '2017-02-10 13:45:49');
-INSERT INTO `w_articles` VALUES ('11', '素描头像', 'http://7xs3jl.com1.z0.glb.clouddn.com/sumiao02.jpg', '1', '2017-02-10 13:56:41');
-INSERT INTO `w_articles` VALUES ('12', '石膏素描像', 'http://7xs3jl.com1.z0.glb.clouddn.com/SG03%20%282%29.jpg', '7', '2017-02-10 13:58:41');
-INSERT INTO `w_articles` VALUES ('13', '色彩风景', 'http://7xs3jl.com1.z0.glb.clouddn.com/%E8%89%B2%E6%99%AFIMG_9715_%E7%9C%8B%E5%9B%BE%E7%8E%8B.jpg', '8', '2017-02-10 14:00:03');
-INSERT INTO `w_articles` VALUES ('14', '色彩静物', 'http://www.yantujy.com/index.php?g=&m=article&a=index&id=34&cid=26', '8', '2017-02-10 14:01:08');
-INSERT INTO `w_articles` VALUES ('15', '色彩头像', 'http://7xs3jl.com1.z0.glb.clouddn.com/secai02.jpg', '8', '2017-02-10 14:03:11');
-INSERT INTO `w_articles` VALUES ('16', '风景速写1', 'http://7xs3jl.com1.z0.glb.clouddn.com/IMG_9665_%E7%9C%8B%E5%9B%BE%E7%8E%8B.jpg', '9', '2017-02-10 14:04:21');
-INSERT INTO `w_articles` VALUES ('17', '风景速写2', 'http://7xs3jl.com1.z0.glb.clouddn.com/IMG_9647_%E7%9C%8B%E5%9B%BE%E7%8E%8B.jpg', '9', '2017-02-10 14:05:55');
-INSERT INTO `w_articles` VALUES ('18', '风景速写3', 'http://7xs3jl.com1.z0.glb.clouddn.com/IMG_9662_%E7%9C%8B%E5%9B%BE%E7%8E%8B.jpg', '9', '2017-02-10 14:06:40');
-INSERT INTO `w_articles` VALUES ('19', '上课场景', 'http://7xs3jl.com1.z0.glb.clouddn.com/shangke,%E4%B8%8A%E8%AF%BE1.jpg', '11', '2017-02-10 14:07:49');
-INSERT INTO `w_articles` VALUES ('20', '范画现场', 'http://7xs3jl.com1.z0.glb.clouddn.com/fanhuaxianchang%E8%8C%83%E7%94%BB1.jpg', '11', '2017-02-10 14:08:38');
-INSERT INTO `w_articles` VALUES ('21', '模拟考试', 'http://7xs3jl.com1.z0.glb.clouddn.com/kaosi%E8%80%83%E8%AF%952.jpg', '11', '2017-02-10 14:09:26');
-INSERT INTO `w_articles` VALUES ('22', '袁帅', 'http://7xs3jl.com1.z0.glb.clouddn.com/5.jpg', '6', '2017-02-10 14:33:19');
-INSERT INTO `w_articles` VALUES ('23', '张俊鹏', 'http://7xs3jl.com1.z0.glb.clouddn.com/0.jpg', '6', '2017-02-10 14:33:55');
-INSERT INTO `w_articles` VALUES ('24', '王磊', 'http://7xs3jl.com1.z0.glb.clouddn.com/4.jpg', '6', '2017-02-10 14:34:49');
-INSERT INTO `w_articles` VALUES ('25', '张振铎', 'http://7xs3jl.com1.z0.glb.clouddn.com/2.jpg', '6', '2017-02-10 14:35:27');
+INSERT INTO `w_articles` VALUES ('1', '中央美术学院', '中央美术学院', 'http://7xs3jl.com1.z0.glb.clouddn.com/meiyuantubiao%E5%A4%AE%E7%BE%8E.png', '5', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('2', '2016年普通高校招生志愿填报及录取有关规定', '2016年普通高校招生志愿填报及录取有关规定', '', '3', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('3', '中国美术学院', '中国美术学院', 'http://7xs3jl.com1.z0.glb.clouddn.com/meiyuantubiao%E5%9B%BD%E7%BE%8E.png', '5', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('4', '2016年河南省高考分数线', '2016年河南省高考分数线', '', '3', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('5', '江苏大学新生要参加“防骗考” 不达80分要重考', '江苏大学新生要参加“防骗考” 不达80分要重考', '', '3', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('6', '2016统考美术要求', '2016统考美术要求', '', '3', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('7', '沿途历年学员录取名单', '沿途历年学员录取名单', 'http://7xs3jl.com1.z0.glb.clouddn.com/jiazhangshouche%20001.jpg', '2', '2014-10-26 15:43:00');
+INSERT INTO `w_articles` VALUES ('8', '2016校考成绩', '2016校考成绩', 'http://7xs3jl.com1.z0.glb.clouddn.com/xiaokaozheng%E4%BD%95%E4%BC%A0%E7%8E%BA%E5%A4%AE%E7%BE%8E.jpg', '1', '2017-01-05 18:35:21');
+INSERT INTO `w_articles` VALUES ('9', '清华美术学院', '清华美术学院', 'http://7xs3jl.com1.z0.glb.clouddn.com/meiyuantubiao%E6%B8%85%E7%BE%8E.jpg', '5', '2017-02-10 07:01:03');
+INSERT INTO `w_articles` VALUES ('10', '河南：165所院校艺术类招生使用校考成绩录取', '河南：165所院校艺术类招生使用校考成绩录取', '', '3', '2017-02-10 13:45:49');
+INSERT INTO `w_articles` VALUES ('11', '素描头像', '素描头像', 'http://7xs3jl.com1.z0.glb.clouddn.com/sumiao02.jpg', '1', '2017-02-10 13:56:41');
+INSERT INTO `w_articles` VALUES ('12', '石膏素描像', '石膏素描像', 'http://7xs3jl.com1.z0.glb.clouddn.com/SG03%20%282%29.jpg', '7', '2017-02-10 13:58:41');
+INSERT INTO `w_articles` VALUES ('13', '色彩风景', '色彩风景', 'http://7xs3jl.com1.z0.glb.clouddn.com/%E8%89%B2%E6%99%AFIMG_9715_%E7%9C%8B%E5%9B%BE%E7%8E%8B.jpg', '8', '2017-02-10 14:00:03');
+INSERT INTO `w_articles` VALUES ('14', '色彩静物', '色彩静物', 'http://www.yantujy.com/index.php?g=&m=article&a=index&id=34&cid=26', '8', '2017-02-10 14:01:08');
+INSERT INTO `w_articles` VALUES ('15', '色彩头像', '色彩头像', 'http://7xs3jl.com1.z0.glb.clouddn.com/secai02.jpg', '8', '2017-02-10 14:03:11');
+INSERT INTO `w_articles` VALUES ('16', '风景速写1', '风景速写1', 'http://7xs3jl.com1.z0.glb.clouddn.com/IMG_9665_%E7%9C%8B%E5%9B%BE%E7%8E%8B.jpg', '9', '2017-02-10 14:04:21');
+INSERT INTO `w_articles` VALUES ('17', '风景速写2', '风景速写2', 'http://7xs3jl.com1.z0.glb.clouddn.com/IMG_9647_%E7%9C%8B%E5%9B%BE%E7%8E%8B.jpg', '9', '2017-02-10 14:05:55');
+INSERT INTO `w_articles` VALUES ('18', '风景速写3', '风景速写3', 'http://7xs3jl.com1.z0.glb.clouddn.com/IMG_9662_%E7%9C%8B%E5%9B%BE%E7%8E%8B.jpg', '9', '2017-02-10 14:06:40');
+INSERT INTO `w_articles` VALUES ('19', '上课场景', '上课场景', 'http://7xs3jl.com1.z0.glb.clouddn.com/shangke,%E4%B8%8A%E8%AF%BE1.jpg', '11', '2017-02-10 14:07:49');
+INSERT INTO `w_articles` VALUES ('20', '范画现场', '范画现场', 'http://7xs3jl.com1.z0.glb.clouddn.com/fanhuaxianchang%E8%8C%83%E7%94%BB1.jpg', '11', '2017-02-10 14:08:38');
+INSERT INTO `w_articles` VALUES ('21', '模拟考试', '模拟考试', 'http://7xs3jl.com1.z0.glb.clouddn.com/kaosi%E8%80%83%E8%AF%952.jpg', '11', '2017-02-10 14:09:26');
+INSERT INTO `w_articles` VALUES ('22', '袁帅', '袁帅', 'http://7xs3jl.com1.z0.glb.clouddn.com/5.jpg', '6', '2017-02-10 14:33:19');
+INSERT INTO `w_articles` VALUES ('23', '张俊鹏', '张俊鹏', 'http://7xs3jl.com1.z0.glb.clouddn.com/0.jpg', '6', '2017-02-10 14:33:55');
+INSERT INTO `w_articles` VALUES ('24', '王磊', '王磊', 'http://7xs3jl.com1.z0.glb.clouddn.com/4.jpg', '6', '2017-02-10 14:34:49');
+INSERT INTO `w_articles` VALUES ('25', '张振铎', '张振铎', 'http://7xs3jl.com1.z0.glb.clouddn.com/2.jpg', '6', '2017-02-10 14:35:27');
 
 -- ----------------------------
 -- Table structure for `w_articles_content`
@@ -348,3 +354,5 @@ CREATE TABLE `w_sessions` (
 -- ----------------------------
 -- Records of w_sessions
 -- ----------------------------
+INSERT INTO `w_sessions` VALUES ('7rens3j3fi6qpopcmi4ngbj7v7', '1492077974', '7rens3j3fi6qpopcmi4ngbj7v7userinfo|a:9:{s:6:\"userid\";s:1:\"1\";s:8:\"username\";s:5:\"admin\";s:8:\"password\";s:32:\"7e8ae30658965420b3e8ed0eea6ba412\";s:8:\"group_id\";s:1:\"1\";s:5:\"email\";s:16:\"361131953@qq.com\";s:9:\"is_active\";s:1:\"1\";s:6:\"avatar\";s:0:\"\";s:8:\"add_date\";s:19:\"2015-08-08 14:35:43\";s:15:\"last_login_date\";s:19:\"2017-04-12 17:42:40\";}');
+INSERT INTO `w_sessions` VALUES ('cv5uktk87cmprn355c25l0uv15', '1492076577', 'cv5uktk87cmprn355c25l0uv15userinfo|a:9:{s:6:\"userid\";s:1:\"1\";s:8:\"username\";s:5:\"admin\";s:8:\"password\";s:32:\"7e8ae30658965420b3e8ed0eea6ba412\";s:8:\"group_id\";s:1:\"1\";s:5:\"email\";s:16:\"361131953@qq.com\";s:9:\"is_active\";s:1:\"1\";s:6:\"avatar\";s:0:\"\";s:8:\"add_date\";s:19:\"2015-08-08 14:35:43\";s:15:\"last_login_date\";s:19:\"2017-02-10 14:32:19\";}');

@@ -14,5 +14,8 @@ class FController extends Controller
         
         $Links = new Links();
         $this->links = $Links->order('lid', 'desc')->getAll();
+
+        $this->REQUEST_URI = $_SERVER['REQUEST_URI'];
+
     }
 }

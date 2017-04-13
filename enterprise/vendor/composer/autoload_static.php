@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita2fed61feb65c3fa11892bfc046f2ece
+class ComposerStaticInitcbe0e0b479156df21ee70a635e132e2c
 {
     public static $classMap = array (
         'AdminController' => __DIR__ . '/../..' . '/admin/controllers/AdminController.php',
@@ -44,6 +44,7 @@ class ComposerStaticInita2fed61feb65c3fa11892bfc046f2ece
         'MenusController' => __DIR__ . '/../..' . '/admin/controllers/MenusController.php',
         'Model' => __DIR__ . '/..' . '/xpmozong/wavephp2/framework/db/Model.php',
         'Mysql' => __DIR__ . '/..' . '/xpmozong/wavephp2/framework/db/Mysql.php',
+        'NullStdClass' => __DIR__ . '/..' . '/xpmozong/wavephp2/framework/cache/NullStdClass.php',
         'PHPMailer' => __DIR__ . '/..' . '/xpmozong/wavephp2/framework/mail/class.phpmailer.php',
         'PageController' => __DIR__ . '/../..' . '/protected/controllers/PageController.php',
         'Pdomysql' => __DIR__ . '/..' . '/xpmozong/wavephp2/framework/db/Pdomysql.php',
@@ -59,7 +60,7 @@ class ComposerStaticInita2fed61feb65c3fa11892bfc046f2ece
         'SiteController' => __DIR__ . '/../..' . '/protected/controllers/SiteController.php',
         'Smarty' => __DIR__ . '/..' . '/xpmozong/wavephp2/framework/smarty/Smarty.class.php',
         'Tree' => __DIR__ . '/../..' . '/admin/models/Tree.php',
-        'UploadController' => __DIR__ . '/../..' . '/admin/controllers/UploadController.php',
+        'UploadController' => __DIR__ . '/../..' . '/protected/controllers/UploadController.php',
         'Users' => __DIR__ . '/../..' . '/admin/models/Users.php',
         'UsersController' => __DIR__ . '/../..' . '/admin/controllers/UsersController.php',
         'VerifyCode' => __DIR__ . '/..' . '/xpmozong/wavephp2/framework/captcha/VerifyCode.class.php',
@@ -75,7 +76,7 @@ class ComposerStaticInita2fed61feb65c3fa11892bfc046f2ece
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInita2fed61feb65c3fa11892bfc046f2ece::$classMap;
+            $loader->classMap = ComposerStaticInitcbe0e0b479156df21ee70a635e132e2c::$classMap;
 
         }, null, ClassLoader::class);
     }
