@@ -33,6 +33,9 @@ class AdminController extends KController
         $this->username = $userinfo['username'];
         $this->last_login_date = $userinfo['last_login_date'];
         $this->avatarUrl = $userinfo['avatar'];
+
+        $articlesModel = new Articles();
+        $this->articleCount = $articlesModel->getCount('*');
     }
     
     /**
