@@ -1,0 +1,61 @@
+{%include file="layout/header.html"%}
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                {%$subtitle%}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{%$homeUrl%}"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">{%$subtitle%}</li>
+            </ol>
+        </section>
+        <form enctype="multipart/form-data" id="form-modify" class="form-horizontal" action="{%$homeUrl%}{%$classname%}/modified" method="POST" onsubmit="return checkForm()">
+        <section class="content">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                    {%if $data.menu_id%}修改{%else%}添加{%/if%}链接
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label">链接标题</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="title" id="title" type="text" value="{%$data.title%}" placeholder="请输入链接标题">
+                            <input type="hidden" name="lid" value="{%$data.lid%}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="url" class="col-sm-2 control-label">链接URL</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" name="url" id="url" type="text" value="{%$data.url%}" placeholder="请输入链接URL">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-default m-right100" onclick="javascript:history.go(-1);">
+                                    返回
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="save">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </form>
+    </div>
+{%include file="layout/loadjs.html"%}
+<script type="text/javascript">
+var checkForm = function(){
+    var title = $("#title").val();
+    if (!title) {
+        alert("请输入链接标题！");
+        return false;
+    }
+    $("#save").html("提交中...");
+
+    return true;
+}
+</script>
+{%include file="layout/footer.html"%}

@@ -1,0 +1,35 @@
+.m-right20{ margin-right: 20px;}
+.m-right50{ margin-right: 50px;}
+.m-right100{ margin-right: 100px;}
+.m-top10{ margin-top: 10px;}
+.m-bottom{ margin-bottom: 10px;}
+.m-width200{ width: 200px; display: inline;}
+.form-noblock{ display: inline;}
+.dataTables_info{ padding: 6px 12px;}
+.dataTables_paginate{ float: right;}
+.pagination { margin: 0;}
+
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+table.dataTable thead .sorting {
+    background-image: url("../images/sort_both.png");
+}
+table.dataTable thead .sorting_asc {
+    background-image: url("../images/sort_asc.png");
+}
+table.dataTable thead .sorting_desc {
+    background-image: url("../images/sort_desc.png");
+}
+table.dataTable thead .sorting_asc_disabled {
+    background-image: url("../images/sort_asc_disabled.png");
+}
+table.dataTable thead .sorting_desc_disabled {
+    background-image: url("../images/sort_desc_disabled.png");
+}
+
+select.select-middle{ height: 34px;padding: 0 10px;min-width: 150px; }
+label.error{color: #EA5200; font-size: 12px;}
+table tr td{ word-break:break-all; /*支持IE，chrome，FF不支持*/ word-wrap:break-word;/*支持IE，chrome，FF*/ }
