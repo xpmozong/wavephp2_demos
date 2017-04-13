@@ -92,7 +92,7 @@ CREATE TABLE `b_users` (
 -- ----------------------------
 -- Records of b_users
 -- ----------------------------
-INSERT INTO `b_users` VALUES ('1', 'admin', '7e8ae30658965420b3e8ed0eea6ba412', '1', '361131953@qq.com', '1', '', '2015-08-08 14:35:43', '2017-04-12 17:49:10');
+INSERT INTO `b_users` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', '361131953@qq.com', '1', '', '2015-08-08 14:35:43', '2017-04-12 17:49:10');
 
 -- ----------------------------
 -- Table structure for `b_users_group`
