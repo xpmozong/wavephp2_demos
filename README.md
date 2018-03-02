@@ -5,6 +5,6 @@ wavephp2 demos
 composer.json 可以配置版本
 
 enterprise 是CMS demo
-域名配置 www.enterprise.com
+域名配置 www.myenterprise.com
 后台用户名：361131953@qq.com
 后台密码：123456
