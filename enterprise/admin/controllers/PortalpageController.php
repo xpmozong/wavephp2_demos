@@ -69,8 +69,11 @@ class PortalpageController extends CommonController
         if ($pid == 0) {
             $data['add_date'] = date('Y-m-d H:i:s');
             $portalpageModel->insert($data);
-        }else{
+        } else {
             $portalpageModel->update($data, array('pid'=>$pid));
+            $cacheDir = '/data/page/'.($pid%10).'/';
+            $cacheFile = ROOT_PATH.$cacheDir.$pid.'.html';
+            unlink($cacheFile);
         }
 
         $this->jumpBox('成功！', Wave::app()->homeUrl.$this->classname, 1);

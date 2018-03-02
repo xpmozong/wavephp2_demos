@@ -15,24 +15,34 @@ class SiteController extends FController
      */
     public function actionIndex()
     {
-        $articlesModel = new Articles();
-        $this->classname = 'category';
-        $this->list1 = $articlesModel->select('*')
-                                ->in(array('cid'=>'7,8,9'))
-                                ->order('aid')->limit(0,4)
-                                ->getAll();
-        $this->list2 = $articlesModel->select('*')
-                                ->in(array('cid'=>'6'))
-                                ->order('aid')->limit(0,4)
-                                ->getAll();
-        $this->list3 = $articlesModel->select('*')
-                                ->in(array('cid'=>'11,12,13'))
-                                ->order('aid')->limit(0,4)
-                                ->getAll();
-        $this->list4 = $articlesModel->select('*')
-                                ->in(array('cid'=>'5'))
-                                ->order('aid')->limit(0,4)
-                                ->getAll();
+        $cacheDir = '/data/';
+        $cacheFile = ROOT_PATH.$cacheDir.'index.html';
+        if (file_exists($cacheFile)) {
+            $url = $this->hostInfo.$cacheDir.'index.html';
+            $this->redirect($url);
+        } else {
+            $articlesModel = new Articles();
+            $this->classname = 'category';
+            $this->list1 = $articlesModel->select('*')
+                                    ->in(array('cid'=>'7,8,9'))
+                                    ->order('aid')->limit(0,4)
+                                    ->getAll();
+            $this->list2 = $articlesModel->select('*')
+                                    ->in(array('cid'=>'6'))
+                                    ->order('aid')->limit(0,4)
+                                    ->getAll();
+            $this->list3 = $articlesModel->select('*')
+                                    ->in(array('cid'=>'11,12,13'))
+                                    ->order('aid')->limit(0,4)
+                                    ->getAll();
+            $this->list4 = $articlesModel->select('*')
+                                    ->in(array('cid'=>'5'))
+                                    ->order('aid')->limit(0,4)
+                                    ->getAll();
+            WaveCommon::mkDir(ROOT_PATH.$cacheDir);
+            $content = $this->fetch('site/index.html');
+            Wave::writeCache($cacheFile, $content);
+        }
     }
 
     public function actionDbtest()
@@ -78,9 +88,9 @@ class SiteController extends FController
     public function actionLogin()
     {
         $userinfo = Wave::app()->session->getState('userinfo');
-        if(!empty($userinfo)){
+        if (!empty($userinfo)) {
             $this->redirect(Wave::app()->homeUrl);
-        }else{
+        } else {
             
         }
     }
@@ -88,22 +98,22 @@ class SiteController extends FController
     public function actionLoging()
     {
         $data = WaveCommon::getFilter($_POST);
-        if(empty($data['user_login']))
+        if (empty($data['user_login']))
             WaveCommon::exportResult(false, '请输入用户名！');
 
-        if(empty($data['user_pass']))
+        if (empty($data['user_pass']))
             WaveCommon::exportResult(false, '请输入密码！');
         
         $Users = new Users();
         $array = $Users->getOne('*', array('email'=>$data['user_login']));
-        if(!empty($array)){
+        if (!empty($array)) {
             if ($array['password'] == md5($data['user_pass'])) {
                 Wave::app()->session->setState('userinfo', $array);
                 WaveCommon::exportResult(true, '登录成功！');
-            }else{
+            } else {
                 WaveCommon::exportResult(false, '用户名或密码错误！');
             }
-        }else{
+        } else {
             WaveCommon::exportResult(false, '用户名或密码错误！');
         }
     }
@@ -117,17 +127,17 @@ class SiteController extends FController
     {
         $Users = new Users();
         $data = WaveCommon::getFilter($_POST);
-        if(empty($data['email']))
+        if (empty($data['email']))
             WaveCommon::exportResult(false, '请输入邮箱！');
 
-        if(empty($data['password']))
+        if (empty($data['password']))
             WaveCommon::exportResult(false, '请输入密码！');
 
         $data['add_date'] = WaveCommon::getDate();
         $data['password'] = md5($data['password']);
         if ($Users->insert($data)) {
             WaveCommon::exportResult(true, '注册成功！');
-        }else{
+        } else {
             WaveCommon::exportResult(false, '注册失败！');
         }
     }
@@ -147,7 +157,7 @@ class SiteController extends FController
             $array['success'] = true;
             $array['userid'] = $userinfo['userid'];
             $array['username'] = $userinfo['email'];
-        }else{
+        } else {
             $array['success'] = false;
         }
         

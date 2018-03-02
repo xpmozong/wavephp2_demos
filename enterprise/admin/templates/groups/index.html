@@ -60,15 +60,15 @@ function enable(group_state,id){
         $.getJSON("{%$homeUrl%}{%$classname%}/disable?group_state=0&group_id="+id,function(data){
             if(data.code == true){
                 getData();
-            }else{
+            } else {
                 alert(data.msg);
             }
         });
-    }else{
+    } else {
         $.getJSON("{%$homeUrl%}{%$classname%}/disable?group_state=1&group_id="+id,function(data){
             if(data.code == true){
                 getData();
-            }else{
+            } else {
                 alert(data.msg);
             }
         });       

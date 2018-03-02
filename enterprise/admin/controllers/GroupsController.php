@@ -44,7 +44,7 @@ class GroupsController extends CommonController
             $list[$key]['operation'] = '<a href="'.$modifyUrl.$value['group_id'].'" class="btn btn-xs btn-info">编辑</a> | ';
             if ($value['group_state']) {
                 $list[$key]['operation'] .= '<a href="javascript:void(0);" onclick="enable('.$value['group_state'].','.$value['group_id'].')" class="btn btn-xs btn-danger">禁用</a>';
-            }else{
+            } else {
                 $list[$key]['operation'] .= '<a href="javascript:void(0);" onclick="enable('.$value['group_state'].','.$value['group_id'].')" class="btn btn-xs btn-success">启用</a>';
             }
         }
@@ -82,7 +82,7 @@ class GroupsController extends CommonController
             $group_id = $groupModel->insert($data);
             $data['group_id'] = $group_id;
             $this->Log->saveLogs('添加用户组', 1, $data);
-        }else{
+        } else {
             $groupModel->update($data, array('group_id'=>$group_id));
             $data['group_id'] = $group_id;
             $this->Log->saveLogs('修改用户组', 1, $data);

@@ -58,7 +58,7 @@ var mdelete = function(id){
         $.getJSON("{%$homeUrl%}{%$classname%}/delete/"+id, function(data){
             if(data.code == 1){
                 window.location.reload();
-            }else{
+            } else {
                 alert(data.msg);
             }
         })

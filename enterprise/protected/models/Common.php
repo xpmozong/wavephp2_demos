@@ -51,7 +51,7 @@ class Common extends Model
         for ($i = $begin; $i <= $end; $i++) {
             if ($i == $page) {
                 $list .= '<li class="active"><a href="javascript:;">'.$i."</a></li>";
-            }else{
+            } else {
                 $list .= '<li><a href="'.
                 preg_replace('/page\=(\d+)/', 'page='.$i, $url).'">'.$i."</a></li>";
             }

@@ -49,7 +49,7 @@ class UsersController extends CommonController
             $list[$key]['operation'] = '<a href="'.$modifyUrl.$value['userid'].'" class="btn btn-xs btn-info">编辑</a> | ';
             if ($value['is_active']) {
                 $list[$key]['operation'] .= '<a href="javascript:void(0)" onclick="enable('.$value['is_active'].','.$value['userid'].')" class="btn btn-xs btn-danger">禁用</a>';
-            }else{
+            } else {
                 $list[$key]['operation'] .= '<a href="javascript:void(0)" onclick="enable('.$value['is_active'].','.$value['userid'].')" class="btn btn-xs btn-success">启用</a>';
             }
         }
@@ -86,12 +86,12 @@ class UsersController extends CommonController
         
         if (!empty($_FILES['avatar']['tmp_name'])) {
             $imgTypeArr = WaveCommon::getImageTypes();
-            if(!in_array($_FILES['avatar']['type'], $imgTypeArr)){
+            if (!in_array($_FILES['avatar']['type'], $imgTypeArr)) {
                 $this->jumpBox('头像格式不正确！', $returnUrl, 1);
-            }else{
+            } else {
                 $projectPath = Wave::app()->projectPath;
                 $uploadPath = $projectPath.'data/uploadfile/admin_avatar';
-                if(!is_dir($uploadPath)) mkdir($uploadPath, 0777);
+                if (!is_dir($uploadPath)) mkdir($uploadPath, 0777);
 
                 $old_avatar_path = $uploadPath.'/'.$old_avatar;
                 if (!empty($old_avatar) && file_exists($old_avatar_path)) {
@@ -102,7 +102,7 @@ class UsersController extends CommonController
                 $imageName = time().'_'.rand().'.'.$imgType;
 
                 $imgPath = $uploadPath.'/'.$imageName;
-                if(!move_uploaded_file($_FILES['avatar']['tmp_name'], $imgPath)){
+                if (!move_uploaded_file($_FILES['avatar']['tmp_name'], $imgPath)) {
                     $this->jumpBox('头像失败！', $returnUrl, 1);
                 }
                 $data['avatar'] = $imageName;
@@ -120,7 +120,7 @@ class UsersController extends CommonController
             $userid = $Users->insert($data);
             $data['userid'] = $userid;
             $this->Log->saveLogs('添加用户', 1, $data);
-        }else{
+        } else {
             if ($data['oldemail'] != $data['email']) {
                 $count = $Users->getCount('*', array('email' => $data['email']));
                 if ($count > 0) {
@@ -130,7 +130,7 @@ class UsersController extends CommonController
             unset($data['oldemail']);
             if (!empty($data['password'])) {
                 $data['password'] = md5($data['password']);
-            }else{
+            } else {
                 unset($data['password']);
             }
             $Users->update($data, array('userid'=>$userid));

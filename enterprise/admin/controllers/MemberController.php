@@ -41,7 +41,7 @@ class MemberController extends CommonController
             $updateData = array('password'=> md5($data['newpwd']));
             $usersModel->update($updateData, $where);
             $this->jumpBox('修改成功！', Wave::app()->homeUrl.'member', 1);
-        }else{
+        } else {
             $this->jumpBox('密码错误！', Wave::app()->homeUrl.'member', 1);
         }
     }

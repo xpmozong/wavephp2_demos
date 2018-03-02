@@ -98,7 +98,7 @@ function checkAll(id){
             $("input[id='setselect"+id+"']").each(function(){
               $(this).prop('checked',true);
         })
-    }else{
+    } else {
        $("input[id='setselect"+id+"']").each(function(){
               $(this).prop('checked',false);
         }) 
@@ -112,7 +112,7 @@ function setcheckAll(id){
             if($(obj[i]).prop('checked')==true){
                 $('#selectAll'+id).prop('checked',true);
                 return false;
-            }else{
+            } else {
                 $('#selectAll'+id).prop('checked',false);
             }
          }

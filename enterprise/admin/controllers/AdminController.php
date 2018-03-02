@@ -21,7 +21,7 @@ class AdminController extends KController
     {
         $userinfo = Wave::app()->session->getState('userinfo');
 
-        if(empty($userinfo)){
+        if (empty($userinfo)) {
             $this->redirect(Wave::app()->homeUrl.'admin/login');
         }
 
@@ -44,7 +44,7 @@ class AdminController extends KController
     public function actionLogin()
     {
         $userinfo = Wave::app()->session->getState('userinfo');
-        if(!empty($userinfo)){
+        if (!empty($userinfo)) {
             $this->redirect(Wave::app()->homeUrl);
         }
         
@@ -54,7 +54,7 @@ class AdminController extends KController
             $this->data = WaveCommon::getFilter($_POST);
             $Users = new Users();
             $array = $Users->getOne('*', array('email'=>$this->data['email']));
-            if(!empty($array)){
+            if (!empty($array)) {
                 if ($array['is_active'] != '1') {
                     $this->error_msg = '该用户被禁用！';
                 }
@@ -64,10 +64,10 @@ class AdminController extends KController
                     unset($this->data['password']);
                     $this->Log->saveLogs('登录', 1, $this->data);
                     $this->jumpBox('登录成功！', Wave::app()->homeUrl, 1);
-                }else{
+                } else {
                     $this->error_msg = '用户名或密码错误！';
                 }
-            }else{
+            } else {
                 $this->error_msg = '没有该用户！';
             }
             $this->Log->saveLogs('登录', 0, $this->data);

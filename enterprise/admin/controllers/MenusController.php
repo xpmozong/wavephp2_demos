@@ -49,7 +49,7 @@ class MenusController extends CommonController
             $menu_id = $menuModel->insert($data, 'menus');
             $data['menu_id'] = $menu_id;
             $this->Log->saveLogs('添加菜单', 1, $data);
-        }else{
+        } else {
             $menuModel->update($data, array('menu_id'=>$menu_id), 'menus');
             $data['menu_id'] = $menu_id;
             $this->Log->saveLogs('修改菜单', 1, $data);

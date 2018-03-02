@@ -48,7 +48,7 @@ class CategoriesController extends CommonController
         unset($data['cid']);
         if ($cid == 0) {
             $categoryModel->insert($data);
-        }else{
+        } else {
             $categoryModel->update($data, array('cid'=>$cid));
         }
 

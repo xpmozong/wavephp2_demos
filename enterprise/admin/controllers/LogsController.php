@@ -42,7 +42,7 @@ class LogsController extends CommonController
             $list[$key]['time'] = date('Y-m-d H:i:s', $value['time']);
             if ($value['remark']) {
                 $list[$key]['remark'] = '<font color="green">成功</font>';
-            }else{
+            } else {
                 $list[$key]['remark'] = '<font color="red">失败</font>';
             }    
         }

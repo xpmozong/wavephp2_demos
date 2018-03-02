@@ -90,17 +90,21 @@ class ArticlesController extends CommonController
             $content['aid'] = $articlesModel->insert($article);
             $articlesContentModel->insert($content);
             $article['aid'] = $content['aid'];
-        }else{
+        } else {
             $where = array('aid'=>$aid);
             $articlesModel->update($article, $where);
             $count = $articlesContentModel->getCount('*', $where);
             if ($count > 0) {
                 $articlesContentModel->update($content, $where);
-            }else{
+            } else {
                 $content['aid'] = $aid;
                 $articlesContentModel->insert($content);
             }
+            $cacheDir = '/data/article/'.($aid%10).'/';
+            $cacheFile = ROOT_PATH.$cacheDir.$aid.'.html';
+            unlink($cacheFile);
         }
+        unlink(ROOT_PATH.'/data/index.html');
 
         $this->jumpBox('成功！', Wave::app()->homeUrl.$this->classname, 1);
     }

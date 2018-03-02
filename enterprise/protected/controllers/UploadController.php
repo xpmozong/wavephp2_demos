@@ -32,7 +32,7 @@ class UploadController extends KController
                         "type"      => $upfile['type'],     //文件类型
                         "size"      => $upfile['size']      //文件大小
                     );
-                if( $upfile['error'] === 0 ){
+                if ( $upfile['error'] === 0 ) {
                     $type = 'upfile';
                     $month = WaveCommon::getYearMonth();
                     $projectPath = Wave::app()->projectPath;
@@ -53,17 +53,17 @@ class UploadController extends KController
                     if (!empty($updateInfo)) {
                         $imgurl = 'http://'.$this->hostInfo.'/'.$saveDir.'/'.$updateInfo[$type]['savename'];
                     }
-                    if(!empty($imgurl)){
+                    if (!empty($imgurl)) {
                         // 请求成功
                         $ajaxReturn['state'] = 'SUCCESS';
                         $ajaxReturn['url'] = $imgurl;
                         $ajaxReturn['title'] = pathinfo($imgurl, PATHINFO_BASENAME);
-                    }else{
+                    } else {
                         // 请求失败
                         $ajaxReturn['state'] = 'Failure';
                     }
 
-                }else{
+                } else {
                     $errorMsg = array('', '大小超过限制', '大小超过限制', '文件只有部分被上传', '没有文件被上传', '上传文件大小为0');
                     $ajaxReturn['state'] = $errorMsg[$upfile['error']];
                 }

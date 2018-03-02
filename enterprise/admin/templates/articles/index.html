@@ -71,7 +71,7 @@ var mdelete = function(id){
         $.getJSON("{%$homeUrl%}{%$classname%}/delete/"+id, function(data){
             if(data.code == true){
                 window.location.href = "{%$homeUrl%}{%$classname%}";
-            }else{
+            } else {
                 alert(data.msg);
             }
         })

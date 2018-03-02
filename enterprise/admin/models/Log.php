@@ -25,7 +25,7 @@ class Log extends Model
                 $v = '';
                 if (is_array($value)) {
                     $v = implode(',', $value);
-                }else{
+                } else {
                     $v = $value;
                 }
                 $p .= $key.'='.$v.' | ';

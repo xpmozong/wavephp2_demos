@@ -44,7 +44,7 @@ class LinksController extends CommonController
         unset($data['lid']);
         if ($id == 0) {
             $Links->insert($data);
-        }else{
+        } else {
             $Links->update($data, array('lid'=>$id));
         }
 

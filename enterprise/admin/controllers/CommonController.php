@@ -9,7 +9,7 @@ class CommonController extends KController
         parent::__construct();
 
         $this->userinfo = Wave::app()->session->getState('userinfo');
-        if(empty($this->userinfo)){
+        if (empty($this->userinfo)) {
             $this->redirect(Wave::app()->homeUrl.'admin/login');
         }
         
