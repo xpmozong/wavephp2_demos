@@ -35,6 +35,27 @@ class SiteController extends FController
                                 ->getAll();
     }
 
+    public function actionDbtest()
+    {
+        $insertData = array(
+            'user_id' => '3900749415604665',
+            'content' => '第三方似懂非懂',
+            'cms_content' => '斯蒂芬斯蒂芬的发',
+            'post_id' => 7429,
+            'reply_post_content_id' => 0,
+            'near_reply_post_content_id' => 0,
+            'near_reply_post_content_uid' => 0,
+            'status' => 1,
+            'floor_num' => 1,
+            'utime' => 1512357013,
+            'ctime' => 1512357013,
+        );
+        $articlesModel = new Articles();
+        $articlesModel->from('juzi_post_content')->insert($insertData);
+        echo $articlesModel->lastSql();
+        die;
+    }
+
     public function actionTestLang()
     {
         I18n::$lang = 'vi-vn';

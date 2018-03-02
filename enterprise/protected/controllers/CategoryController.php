@@ -61,16 +61,26 @@ class CategoryController extends FController
     public function actionArticle()
     {
         $aid = $this->getRequest()->getInt('aid');
-        $where = array('a.aid'=>$aid);
-        $articlesModel = new Articles();
-        $this->data = $articlesModel ->select('c.*,a.*')
-                                ->from('w_articles a')
-                                ->join('w_articles_content c', 'a.aid=c.aid')
-                                ->where($where)
-                                ->getOne();
-        if (!empty($this->data)) {
-            $this->data['content'] = stripslashes($this->data['content']);
-            $this->data['content'] = htmlspecialchars_decode($this->data['content']);
+        $cacheDir = '/data/article/'.($aid%10).'/';
+        $cacheFile = ROOT_PATH.$cacheDir.$aid.'.html';
+        if (file_exists($cacheFile)) {
+            $url = $this->hostInfo.$cacheDir.$aid.'.html';
+            $this->redirect($url);
+        } else {
+            $where = array('a.aid'=>$aid);
+            $articlesModel = new Articles();
+            $this->data = $articlesModel ->select('c.*,a.*')
+                                    ->from('w_articles a')
+                                    ->join('w_articles_content c', 'a.aid=c.aid')
+                                    ->where($where)
+                                    ->getOne();
+            if (!empty($this->data)) {
+                $this->data['content'] = stripslashes($this->data['content']);
+                $this->data['content'] = htmlspecialchars_decode($this->data['content']);
+            }
+            WaveCommon::mkDir(ROOT_PATH.$cacheDir);
+            $content = $this->fetch('category/article.html');
+            Wave::writeCache($cacheFile, $content);
         }
     }
 

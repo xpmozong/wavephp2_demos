@@ -20,7 +20,7 @@ $config = array(
     ),
 
     'debuger'                       => false,       // 显示debug信息
-    'crash_show_sql'                => false,        // 是否显示错误sql
+    'crash_show_sql'                => true,        // 是否显示错误sql
 
     'ini_set'                       => array(
         'session.cookie_domain'     => '.enterprise.com', // session跨域设置
@@ -71,12 +71,12 @@ $config = array(
     //     ),
     // ),
 
-    'redis'                 => array(
-        'master'            => array(
-            'host'          => '106.75.61.203',
-            'port'          => 16379,
-            'prefix'        => 'en_'
-        )
-    ),
+    // 'redis'                 => array(
+    //     'master'            => array(
+    //         'host'          => '127.0.0.1',
+    //         'port'          => 6379,
+    //         'prefix'        => 'en_'
+    //     )
+    // ),
 );
 ?>

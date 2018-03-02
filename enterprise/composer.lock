@@ -1,0 +1,69 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "9732f026a52602fe20bf20499ec3cdfb",
+    "packages": [
+        {
+            "name": "xpmozong/wavephp2",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xpmozong/wavephp2.git",
+                "reference": "613912469a5501753f77c776a01ba455597a14d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/xpmozong/wavephp2/613912469a5501753f77c776a01ba455597a14d8.zip",
+                "reference": "613912469a5501753f77c776a01ba455597a14d8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "framework",
+            "autoload": {
+                "classmap": [
+                    "framework/smarty/Smarty.class.php",
+                    "framework/cache",
+                    "framework/captcha",
+                    "framework/cookie",
+                    "framework/core",
+                    "framework/db",
+                    "framework/extends",
+                    "framework/language",
+                    "framework/mail",
+                    "framework/session",
+                    "framework/Wave.php",
+                    "framework/Base.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "xuping",
+                    "email": "361131953@qq.com"
+                }
+            ],
+            "description": "PHP framework",
+            "homepage": "http://www.37study.com",
+            "keywords": [
+                "php framework"
+            ],
+            "time": "2018-01-30T08:37:33+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
