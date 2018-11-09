@@ -23,14 +23,14 @@ $config = array(
     'crash_show_sql'                => true,        // 是否显示错误sql
 
     'ini_set'                       => array(
-        'session.cookie_domain'     => '.enterprise.com', // session跨域设置
+        'session.cookie_domain'     => '.myenterprise.com', // session跨域设置
         'display_errors'            => 1,
     ),
 
     'database'                      => array(
         'driver'                    => 'wmysqli',
         'master'                    => array(
-            'dbhost'                => 'localhost',
+            'dbhost'                => '127.0.0.1',
             'dbport'                => 3306,
             'username'              => 'root',
             'password'              => '',
@@ -60,7 +60,7 @@ $config = array(
     // ),
 
     'cookie'                        => array(
-        'domain'                    => '.enterprise.com',
+        'domain'                    => '.myenterprise.com',
         'timeout'                   => 86400*30
     ),
 
