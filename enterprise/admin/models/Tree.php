@@ -46,7 +46,7 @@ class Tree {
     function __construct($arr = array())
     {
         $this->arr = $arr;
-        $this->ret = '';
+        $this->ret = [];
 
         return is_array($arr);
     }
